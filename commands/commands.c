@@ -97,8 +97,6 @@ Command parseCommand(const char *entry) {
             continue;
         }
 
-        command.options[command.optionsCount - 1].hasValue = true;
-
         for (int j = (i - currentSize); j < i; ++j) {
             command.options[command.optionsCount - 1].value[j - i + currentSize] = entry[j];
         }

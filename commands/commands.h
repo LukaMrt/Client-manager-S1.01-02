@@ -4,7 +4,6 @@
 typedef struct option {
     char name[20];
     char value[20];
-    bool hasValue;
 } Option;
 
 typedef struct command {
