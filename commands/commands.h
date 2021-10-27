@@ -1,6 +1,8 @@
 #ifndef CLIENT_MANAGER_S1_01_02_COMMANDS_H
 #define CLIENT_MANAGER_S1_01_02_COMMANDS_H
 
+#include "../data.h"
+
 typedef struct option {
     char name[20];
     char value[20];
@@ -14,20 +16,22 @@ typedef struct command {
 
 Command parseCommand(const char *entry);
 
-void executeCommand(const char *entry);void add();
+void executeCommand(const char *entry, Customer *customers);
 
-void delete();
+void add(Customer *customers);
 
-void filter();
+void delete(Customer *customers);
 
-void search();
+void filter(Customer *customers);
 
-void sort();
+void search(Customer *customers);
 
-void edit();
+void sort(Customer *customers);
 
-void save();
+void edit(Customer *customers);
 
-void load();
+void save(Customer *customers);
+
+void load(Customer *customers);
 
 #endif //CLIENT_MANAGER_S1_01_02_COMMANDS_H

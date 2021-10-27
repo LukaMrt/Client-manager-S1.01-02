@@ -2,7 +2,7 @@
 #include <stdbool.h>
 #include "commands.h"
 
-void executeCommand(const char *entry) {
+void executeCommand(const char *entry, Customer *customers) {
 
     Command command = parseCommand(entry);
 
@@ -17,35 +17,35 @@ void executeCommand(const char *entry) {
     switch (result) {
 
         case 297:
-            add();
+            add(customers);
             break;
 
         case 630:
-            search();
+            search(customers);
             break;
 
         case 646:
-            filter();
+            filter(customers);
             break;
 
         case 627:
-            delete();
+            delete(customers);
             break;
 
         case 456:
-            sort();
+            sort(customers);
             break;
 
         case 422:
-            edit();
+            edit(customers);
             break;
 
         case 431:
-            save();
+            save(customers);
             break;
 
         case 416:
-            load();
+            load(customers);
             break;
 
         case 442: // exit
@@ -107,34 +107,34 @@ Command parseCommand(const char *entry) {
     return command;
 }
 
-void add() {
+void add(Customer *customers) {
     printf("Entrez le nom du client à ajouter : \n");
 }
 
-void delete() {
+void delete(Customer *customers) {
     printf("Entrez le nom du client à supprimer : \n");
 }
 
-void filter() {
+void filter(Customer *customers) {
     printf("Entrez le champ selon lequel le filtre sera effectué : \n");
 }
 
-void search() {
+void search(Customer *customers) {
     printf("Entrez le champ selon lequel la recherche sera effectuée : \n");
 }
 
-void sort() {
+void sort(Customer *customers) {
     printf("Entrez le champ selon lequel le tri sera effectué : \n");
 }
 
-void edit() {
+void edit(Customer *customers) {
     printf("Entrez le nom du client à modifier : \n");
 }
 
-void save() {
+void save(Customer *customers) {
     printf("Entrez le nom du fichier dans lequel seront enregistrées les données : \n");
 }
 
-void load() {
+void load(Customer *customers) {
     printf("Entrez le nom du fichier depuis lequel seront chargées les données : \n");
 }

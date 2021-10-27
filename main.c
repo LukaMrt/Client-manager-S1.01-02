@@ -35,7 +35,12 @@ bool shouldStop(const char *entry);
 int main() {
 
     printf("  ~~~ Client manager ~~~ \n");
-    char *entry = realloc(NULL, 1);
+    char *entry = "";
+    Customer customers[10000];
+
+    for (int i = 0; i < 10000; ++i) {
+        customers[i].valid = false;
+    }
 
     do {
         printf("Enter a command : \n");
@@ -51,7 +56,7 @@ int main() {
 
         entry[--size - 1] = '\0';
 
-        executeCommand(entry);
+        executeCommand(entry, customers);
     } while (!shouldStop(entry));
 
     return 0;
