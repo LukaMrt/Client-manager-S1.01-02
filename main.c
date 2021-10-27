@@ -34,11 +34,11 @@ bool shouldStop(const char *entry);
 
 int main() {
 
-    printf("  ~~~ Lancement du Client manager ~~~ \n");
+    printf("  ~~~ Client manager ~~~ \n");
     char *entry = realloc(NULL, 1);
 
     do {
-        printf("Entrez une commande : \n");
+        printf("Enter a command : \n");
         
         char c;
         size_t size = 1;
@@ -51,7 +51,7 @@ int main() {
 
         entry[--size - 1] = '\0';
 
-        executeCommand(entry, size);
+        executeCommand(entry);
     } while (!shouldStop(entry));
 
     return 0;

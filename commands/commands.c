@@ -1,34 +1,18 @@
 #include <stdio.h>
-#include <string.h>
+#include <stdbool.h>
 #include "commands.h"
 
-//Command parseCommand(const char *str, char c, char ***arr);
+void executeCommand(const char *entry) {
 
-void add();
-
-void delete();
-
-void filter();
-
-void search();
-
-void sort();
-
-void edit();
-
-void save();
-
-void load();
-
-void executeCommand(const char *entry, size_t size) {
+    Command command = parseCommand(entry);
 
     int result = 0;
 
-    for (int i = 0; i < size; ++i) {
-        result += (int) entry[i];
+    for (char *i = command.name; *i != '\0'; ++i) {
+        result += (int) *i;
     }
 
-    printf("Commande %s => %d\n", entry, result);
+//    printf("Commande %s => %d\n", command.name, result);
 
     switch (result) {
 
@@ -68,9 +52,61 @@ void executeCommand(const char *entry, size_t size) {
             break;
 
         default:
-            printf("Cette commande n'existe pas\n");
+//            printf("Cette commande n'existe pas\n");
+            break;
     }
 
+}
+
+Command parseCommand(const char *entry) {
+    Command command = { "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0", 0};
+    bool commandFound = false;
+    int currentSize = 1;
+
+    for (int i = 1; entry[i - 1] != '\0'; ++i) {
+
+        ++currentSize;
+
+        if (entry[i] != ' ' && entry[i] != '\0') {
+            continue;
+        }
+
+        if (!commandFound) {
+            commandFound = true;
+
+            for (int j = (i - currentSize); j < currentSize - 1; ++j) {
+                command.name[j] = entry[j];
+            }
+
+            currentSize = -1;
+            continue;
+        }
+
+        if (entry[i - currentSize] == '-') {
+
+            ++command.optionsCount;
+
+            Option option = { "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0", "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"};
+            command.options[command.optionsCount - 1] = option;
+
+            for (int j = (i - currentSize); j < i; ++j) {
+                command.options[command.optionsCount - 1].name[j - i + currentSize] = entry[j];
+            }
+
+            currentSize = -1;
+            continue;
+        }
+
+        command.options[command.optionsCount - 1].hasValue = true;
+
+        for (int j = (i - currentSize); j < i; ++j) {
+            command.options[command.optionsCount - 1].value[j - i + currentSize] = entry[j];
+        }
+
+        currentSize = -1;
+    }
+
+    return command;
 }
 
 void add() {
@@ -104,120 +140,3 @@ void save() {
 void load() {
     printf("Entrez le nom du fichier depuis lequel seront chargées les données : \n");
 }
-
-// Found on https://stackoverflow.com/questions/9210528/split-string-with-delimiters-in-c
-//Command parseCommand(const char *str, char c, char ***arr) {
-//
-//    int count = 1;
-//    int token_len = 1;
-//    int i = 0;
-//    char *p;
-//    char *t;
-//
-//    p = str;
-//    while (*p != '\0') {
-//        if (*p == c)
-//            count++;
-//        p++;
-//    }
-//
-//    *arr = (char **) malloc(sizeof(char *) * count);
-//    if (*arr == NULL)
-//        exit(1);
-//
-//    p = str;
-//    while (*p != '\0') {
-//        if (*p == c) {
-//            (*arr)[i] = (char *) malloc(sizeof(char) * token_len);
-//            if ((*arr)[i] == NULL)
-//                exit(1);
-//
-//            token_len = 0;
-//            i++;
-//        }
-//        p++;
-//        token_len++;
-//    }
-//    (*arr)[i] = (char *) malloc(sizeof(char) * token_len);
-//    if ((*arr)[i] == NULL)
-//        exit(1);
-//
-//    i = 0;
-//    p = str;
-//    t = ((*arr)[i]);
-//    while (*p != '\0') {
-//        if (*p != c && *p != '\0') {
-//            *t = *p;
-//            t++;
-//        } else {
-//            *t = '\0';
-//            i++;
-//            t = ((*arr)[i]);
-//        }
-//        p++;
-//    }
-//
-//    return count;
-//}
-
-//Command parseCommand(char *entry) {
-//    Command command;
-//    bool commandFound = false;
-//    int currentSize = 1;
-//    int argumentCount = 0;
-//    bool lastArgument = true;
-//
-//    for (int i = 1; *(entry + i - 1) != '\0'; ++i) {
-//
-//        ++currentSize;
-//        char a = *(entry + i - 1);
-//        char b = *(entry + i);
-//
-//        if (*(entry + i) == ' ' || *(entry + i) == '\0') {
-//
-//            if (!commandFound) {
-//                commandFound = true;
-//
-//                for (int j = 0; j < currentSize; ++j) {
-//                    command.name[j] = *(entry + j);
-//                }
-//
-//                printf("La commande est : %s\n", command.name);
-//                currentSize = -1;
-//                continue;
-//            }
-//
-//            if (*(entry + i - currentSize) == '-') {
-//
-//                if (lastArgument) {
-//                    ++argumentCount;
-//                }
-//
-//                realloc(command.arguments, sizeof(command.arguments[0]) * (argumentCount + 1));
-//                for (int j = (i - currentSize); j < i; ++j) {
-//                    command.arguments[argumentCount].name[j - i + currentSize] = *(entry + j);
-//                }
-//
-//                printf("L'option est : %s\n", command.arguments[argumentCount].name);
-//                currentSize = -1;
-//                lastArgument = true;
-//
-//            } else {
-//
-//                realloc(command.arguments[argumentCount].argument, currentSize);
-//                for (int j = (i - currentSize); j < i; ++j) {
-//                    command.arguments[argumentCount].argument[j - i + currentSize] = *(entry + j);
-//                }
-//
-//                printf("L'argument est : %s\n", command.arguments[argumentCount].argument);
-//                ++argumentCount;
-//                currentSize = -1;
-//                lastArgument = false;
-//            }
-//
-//        }
-//
-//    }
-//
-//    return command;
-//}
