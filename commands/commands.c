@@ -48,11 +48,12 @@ void executeCommand(const char *entry, Customer *customers) {
             load(customers);
             break;
 
-        case 442: // exit
+        case 442:
+            printf("  ~~~ Client manager ~~~ \n");
             break;
 
         default:
-//            printf("Cette commande n'existe pas\n");
+            printf("Cette commande n'existe pas\n");
             break;
     }
 

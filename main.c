@@ -5,32 +5,32 @@
 
 bool shouldStop(const char *entry);
 
-//char *inputString() {
-//    size_t size = 10;
-//    size_t index = 0;
-//    char *entry;
-//    int entryChar;
-//
-//    entry = realloc(NULL, size);
-//    if (!entry) {
-//        return entry;
-//    }
-//
-//    while ((entryChar = fgetc(stdin)) != '\n') {
-//        entry[index++] = (char) entryChar;
-//
-//        if (index == size) {
-//            entry = realloc(entry, size += 16);
-//            if (!entry) {
-//                return entry;
-//            }
-//        }
-//
-//    }
-//
-//    entry[index] = '\0';
-//    return entry;
-//}
+char *inputString() {
+    size_t size = 10;
+    size_t index = 0;
+    char *entry;
+    int entryChar;
+
+    entry = realloc(NULL, size);
+    if (!entry) {
+        return entry;
+    }
+
+    while ((entryChar = fgetc(stdin)) != '\n') {
+        entry[index++] = (char) entryChar;
+
+        if (index == size) {
+            entry = realloc(entry, size += 16);
+            if (!entry) {
+                return entry;
+            }
+        }
+
+    }
+
+    entry[index] = '\0';
+    return entry;
+}
 
 int main() {
 
@@ -43,20 +43,11 @@ int main() {
     }
 
     do {
+
         printf("Enter a command : \n");
-        
-        char c;
-        size_t size = 1;
-
-        do {
-            c = (char) getchar();
-            entry = realloc(entry, size);
-            entry[size++ - 1] = c;
-        } while (c != '\n');
-
-        entry[--size - 1] = '\0';
-
+        entry = inputString();
         executeCommand(entry, customers);
+
     } while (!shouldStop(entry));
 
     return 0;
