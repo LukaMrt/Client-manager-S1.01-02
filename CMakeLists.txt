@@ -3,4 +3,4 @@ project(Client_manager_S1_01_02 C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(Client_manager_S1_01_02 main.c commands/commands.h commands/commands.c data.h)
+add_executable(Client_manager_S1_01_02 src/main.c src/commands/commands.h src/commands/commands.c src/data.h src/commands/add/add.h src/commands/delete/delete.h src/commands/edit/edit.h src/commands/filter/filter.h src/commands/load/load.h src/commands/save/save.h src/commands/search/search.h src/commands/sort/sort.h src/commands/show/show.h src/commands/add/add.c src/commands/show/show.c)

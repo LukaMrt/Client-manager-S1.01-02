@@ -1,15 +1,17 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "commands.h"
+#include "add/add.h"
+#include "show/show.h"
 
-void executeCommand(const char *entry, Customer *customers) {
+void executeCommand(const char *entry, Customer *customer) {
 
     Command command = parseCommand(entry);
 
     int result = 0;
 
-    for (char *i = command.name; *i != '\0'; ++i) {
-        result += (int) *i;
+    for (int i = 0; entry[i] != '\0'; ++i) {
+        result += (int) entry[i];
     }
 
 //    printf("Commande %s => %d\n", command.name, result);
@@ -17,38 +19,42 @@ void executeCommand(const char *entry, Customer *customers) {
     switch (result) {
 
         case 297:
-            add(customers);
+            add(customer, command);
             break;
 
         case 630:
-            search(customers);
+            search(customer, command);
             break;
 
         case 646:
-            filter(customers);
+            filter(customer, command);
             break;
 
         case 627:
-            delete(customers);
+            delete(customer, command);
             break;
 
         case 456:
-            sort(customers);
+            sort(customer, command);
             break;
 
         case 422:
-            edit(customers);
+            edit(customer, command);
             break;
 
         case 431:
-            save(customers);
+            save(customer, command);
             break;
 
         case 416:
-            load(customers);
+            load(customer, command);
             break;
 
-        case 442:
+        case 449:
+            show(customer, command);
+            break;
+
+        case 442: // exit
             printf("  ~~~ Client manager ~~~ \n");
             break;
 
@@ -56,11 +62,10 @@ void executeCommand(const char *entry, Customer *customers) {
             printf("Cette commande n'existe pas\n");
             break;
     }
-
 }
 
 Command parseCommand(const char *entry) {
-    Command command = { "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0", 0};
+    Command command = {"\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0", 0};
     bool commandFound = false;
     int currentSize = 1;
 
@@ -87,7 +92,7 @@ Command parseCommand(const char *entry) {
 
             ++command.optionsCount;
 
-            Option option = { "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0", "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"};
+            Option option = {"\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0", "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"};
             command.options[command.optionsCount - 1] = option;
 
             for (int j = (i - currentSize); j < i; ++j) {
@@ -108,34 +113,30 @@ Command parseCommand(const char *entry) {
     return command;
 }
 
-void add(Customer *customers) {
-    printf("Entrez le nom du client à ajouter : \n");
+void delete(Customer *customer, Command command) {
+    printf("Enter the name of the client to remove : ");
 }
 
-void delete(Customer *customers) {
-    printf("Entrez le nom du client à supprimer : \n");
+void filter(Customer *customer, Command command) {
+    printf("Enter the field which will used to process the filter : ");
 }
 
-void filter(Customer *customers) {
-    printf("Entrez le champ selon lequel le filtre sera effectué : \n");
+void search(Customer *customer, Command command) {
+    printf("Enter the field which will used to process the research : ");
 }
 
-void search(Customer *customers) {
-    printf("Entrez le champ selon lequel la recherche sera effectuée : \n");
+void sort(Customer *customer, Command command) {
+    printf("Enter the field which will used to process the sort : ");
 }
 
-void sort(Customer *customers) {
-    printf("Entrez le champ selon lequel le tri sera effectué : \n");
+void edit(Customer *customer, Command command) {
+    printf("Enter the name of the customer to edit : ");
 }
 
-void edit(Customer *customers) {
-    printf("Entrez le nom du client à modifier : \n");
+void save(Customer *customer, Command command) {
+    printf("Enter the file where customers will be stored : ");
 }
 
-void save(Customer *customers) {
-    printf("Entrez le nom du fichier dans lequel seront enregistrées les données : \n");
-}
-
-void load(Customer *customers) {
-    printf("Entrez le nom du fichier depuis lequel seront chargées les données : \n");
+void load(Customer *customer, Command command) {
+    printf("Enter the file where customers are stored : ");
 }

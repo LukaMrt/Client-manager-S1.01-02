@@ -3,9 +3,37 @@
 #include <stdlib.h>
 #include "commands/commands.h"
 
+char *scanString();
+
 bool shouldStop(const char *entry);
 
-char *inputString() {
+int main() {
+
+    printf("  ~~~ Client manager ~~~ \n");
+    char *entry;
+    Customer customer = {
+            "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
+            "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
+            "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
+            -1,
+            "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
+            "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
+            "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
+            NULL
+    };
+
+    do {
+
+        printf("\n => Enter a command : ");
+        entry = scanString();
+        executeCommand(entry, &customer);
+
+    } while (!shouldStop(entry));
+
+    return 0;
+}
+
+char *scanString() {
     size_t size = 10;
     size_t index = 0;
     char *entry;
@@ -30,27 +58,6 @@ char *inputString() {
 
     entry[index] = '\0';
     return entry;
-}
-
-int main() {
-
-    printf("  ~~~ Client manager ~~~ \n");
-    char *entry = "";
-    Customer customers[10000];
-
-    for (int i = 0; i < 10000; ++i) {
-        customers[i].valid = false;
-    }
-
-    do {
-
-        printf("Enter a command : \n");
-        entry = inputString();
-        executeCommand(entry, customers);
-
-    } while (!shouldStop(entry));
-
-    return 0;
 }
 
 bool shouldStop(const char *entry) {
