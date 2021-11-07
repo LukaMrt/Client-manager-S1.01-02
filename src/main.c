@@ -11,6 +11,7 @@ int main() {
 
     printf("  ~~~ Client manager ~~~ \n");
     char *entry;
+
     Customer customer = {
             "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
             "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
