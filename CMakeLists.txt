@@ -15,6 +15,7 @@ add_executable(
         src/commands/edit/edit.h
         src/commands/filter/filter.h
         src/commands/load/load.h
+        src/commands/load/load.c
         src/commands/save/save.h
         src/commands/search/search.h
         src/commands/sort/sort.h
