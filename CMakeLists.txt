@@ -2,13 +2,10 @@ cmake_minimum_required(VERSION 3.20)
 project(Client_manager_S1_01_02 C)
 
 set(CMAKE_C_STANDARD 99)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY build)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY build)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 add_executable(
         Client_manager_S1_01_02
-        src/main.c
+        main.c
         src/commands/commands.h
         src/commands/commands.c
         src/data.h
