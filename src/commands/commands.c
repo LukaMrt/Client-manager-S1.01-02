@@ -3,6 +3,7 @@
 #include "commands.h"
 #include "add/add.h"
 #include "show/show.h"
+#include "load/load.h"
 
 void executeCommand(const char *entry, Customer *customer) {
 
@@ -135,8 +136,4 @@ void edit(Customer *customer, Command command) {
 
 void save(Customer *customer, Command command) {
     printf("Enter the file where customers will be stored : ");
-}
-
-void load(Customer *customer, Command command) {
-    printf("Enter the file where customers are stored : ");
 }

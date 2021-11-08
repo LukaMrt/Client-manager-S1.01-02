@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
-#include "commands/commands.h"
+#include "src/commands/commands.h"
 
 char *scanString();
 
