@@ -5,6 +5,11 @@
 #include "delete.h"
 #include "../../utils/utils.h"
 
+/**
+ * Deletes a customer from the list.
+ * @param customer customer to delete.
+ * @param command command to execute.
+ */
 void delete(Customer *customer, Command command) {
 
     char name[20];

@@ -3,22 +3,26 @@
 
 #include "../data.h"
 
+/**
+ * The Options class.
+ */
 typedef struct option {
     char name[20];
     char value[50];
 } Option;
 
+/**
+ * The Command class is the base class for all commands.
+ */
 typedef struct command {
     char name[20];
     int optionsCount;
     Option options[20];
 } Command;
 
-Command parseCommand(const char *entry);
-
 void executeCommand(const char *entry, Customer *customer);
 
-void filter(Customer *customer, Command command);
+Command parseCommand(const char *entry);
 
 void search(Customer *customer, Command command);
 

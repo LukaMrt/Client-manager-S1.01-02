@@ -5,7 +5,13 @@
 #include "show/show.h"
 #include "load/load.h"
 #include "delete/delete.h"
+#include "filter/filter.h"
 
+/**
+ * Executes the options given by the user.
+ * @param entry the command given by the user.
+ * @param customer head list of customers.
+ */
 void executeCommand(const char *entry, Customer *customer) {
 
     Command command = parseCommand(entry);
@@ -66,6 +72,11 @@ void executeCommand(const char *entry, Customer *customer) {
     }
 }
 
+/**
+ * Parses the command given by the user.
+ * @param entry the command given by the user.
+ * @return the command parsed with options.
+ */
 Command parseCommand(const char *entry) {
     Command command = {"\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0", 0};
     bool commandFound = false;

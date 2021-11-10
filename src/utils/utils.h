@@ -8,6 +8,8 @@ char *scanString();
 
 char *reformatString(const char *entry);
 
+void format(char *entry, int size);
+
 bool compareStrings(const char *name, const char *name1, int size);
 
 Customer createCustomer();

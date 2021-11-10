@@ -6,8 +6,11 @@
 #include "add.h"
 #include "../../utils/utils.h"
 
-void format(char *name, int size);
-
+/**
+ * Adds new Customer to list.
+ * @param customer head of customers list.
+ * @param command command to execute.
+ */
 void add(Customer *customer, Command command) {
     char name[25], surname[30], city[25], phone[15], email[50], job[35];
     int postalCode;
@@ -76,14 +79,4 @@ void add(Customer *customer, Command command) {
     strcpy(next->next->email, email);
     strcpy(next->next->job, job);
     printf("Customer has been added successfully\n");
-}
-
-void format(char *name, int size) {
-
-    for (int i = 0; i < size; ++i) {
-        if (name[i] == '\n') {
-            name[i] = '\0';
-        }
-    }
-
 }

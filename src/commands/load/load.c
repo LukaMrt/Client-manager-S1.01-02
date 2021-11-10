@@ -4,9 +4,15 @@
 #include "../../data.h"
 #include "../commands.h"
 #include "../../utils/utils.h"
+#include "load.h"
 
 bool shouldContinue(FILE *file, char *c);
 
+/**
+ * Loads customers from a file.
+ * @param customer head of the customers list.
+ * @param command command to execute.
+ */
 void load(Customer *customer, Command command) {
 
     char *fileName = "";
@@ -139,6 +145,12 @@ void load(Customer *customer, Command command) {
     fclose(file);
 }
 
+/**
+ * Checks if the file is at the end of the file.
+ * @param file file to check.
+ * @param c character to check.
+ * @return false if the file is at the end of the file, true otherwise.
+ */
 bool shouldContinue(FILE *file, char *c) {
     *c = fgetc(file);
     return *c != ',' && !feof(file) && *c != '\0' && *c != '\n';

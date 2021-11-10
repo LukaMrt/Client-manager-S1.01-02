@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include "show.h"
 
+/**
+ * Displays customers list.
+ * @param customer head of the customers list.
+ * @param command command to execute.
+ */
 void show(Customer *customer, Command command) {
 
     if (customer->postalCode == -1) {

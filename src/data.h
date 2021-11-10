@@ -1,6 +1,9 @@
 #ifndef CLIENT_MANAGER_S1_01_02_DATA_H
 #define CLIENT_MANAGER_S1_01_02_DATA_H
 
+/**
+ * Customer data Class.
+ */
 typedef struct customer Customer;
 
 struct customer {

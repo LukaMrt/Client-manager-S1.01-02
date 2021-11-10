@@ -2,6 +2,11 @@
 #include "src/commands/commands.h"
 #include "src/utils/utils.h"
 
+/**
+ * Entry point of application
+ * Retrieves commands from user
+ * @return 0
+ */
 int main() {
 
     printf("  ~~~ Client manager ~~~ \n");
