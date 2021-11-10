@@ -115,10 +115,6 @@ Command parseCommand(const char *entry) {
     return command;
 }
 
-void filter(Customer *customer, Command command) {
-    printf("Enter the field which will used to process the filter : ");
-}
-
 void search(Customer *customer, Command command) {
     printf("Enter the field which will used to process the research : ");
 }
