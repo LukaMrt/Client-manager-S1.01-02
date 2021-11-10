@@ -5,6 +5,8 @@
 #include "../commands.h"
 #include "../../utils/utils.h"
 
+bool shouldContinue(FILE *file, char *c);
+
 void load(Customer *customer, Command command) {
 
     char *fileName = "";
@@ -12,7 +14,6 @@ void load(Customer *customer, Command command) {
     for (int i = 0; i < command.optionsCount; ++i) {
         Option option = command.options[i];
 
-        char *a = reformatString(option.name);
         if (compareStrings(reformatString(option.name), "-file", 20) ||
             compareStrings(reformatString(option.name), "-f", 20)) {
             fileName = reformatString(option.value);
@@ -58,52 +59,60 @@ void load(Customer *customer, Command command) {
         char job[20] = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
 
         int i = 0;
-        while ((c = fgetc(file)) != ',') {
+        while (shouldContinue(file, &c)) {
             if (i < 19) {
                 name[i++] = c;
             }
         }
 
         i = 0;
-        while ((c = fgetc(file)) != ',') {
+        while (shouldContinue(file, &c)) {
             if (i < 19) {
                 surname[i++] = c;
             }
         }
 
         i = 0;
-        while ((c = fgetc(file)) != ',') {
+        while (shouldContinue(file, &c)) {
             if (i < 19) {
                 city[i++] = c;
             }
         }
 
-        while ((c = fgetc(file)) != ',') {
+        while (shouldContinue(file, &c)) {
             postalCode *= 10;
             postalCode += (int) c;
         }
 
         i = 0;
-        while ((c = fgetc(file)) != ',') {
+        while (shouldContinue(file, &c)) {
             if (i < 19) {
                 phone[i++] = c;
             }
         }
 
         i = 0;
-        while ((c = fgetc(file)) != ',') {
+        while (shouldContinue(file, &c)) {
             if (i < 19) {
                 email[i++] = c;
             }
         }
 
         i = 0;
-        c = fgetc(file);
-        while (c != '\n' && c != '\0' && !feof(file)) {
+        while (shouldContinue(file, &c)) {
             if (i < 19) {
                 job[i++] = c;
             }
-            c = fgetc(file);
+        }
+
+        if (name[0] == '\0'
+            && surname[0] == '\0'
+            && city[0] == '\0'
+            && postalCode == 0
+            && phone[0] == '\0'
+            && email[0] == '\0'
+            && job[0] == '\0') {
+            continue;
         }
 
         Customer newCustomer = {
@@ -147,4 +156,9 @@ void load(Customer *customer, Command command) {
 
     printf("Customers successfully loaded.\n");
     fclose(file);
+}
+
+bool shouldContinue(FILE *file, char *c) {
+    *c = fgetc(file);
+    return *c != ',' && !feof(file) && *c != '\0' && *c != '\n';
 }
