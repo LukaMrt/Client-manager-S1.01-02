@@ -4,6 +4,7 @@
 #include "add/add.h"
 #include "show/show.h"
 #include "load/load.h"
+#include "delete/delete.h"
 
 void executeCommand(const char *entry, Customer *customer) {
 
@@ -112,10 +113,6 @@ Command parseCommand(const char *entry) {
     }
 
     return command;
-}
-
-void delete(Customer *customer, Command command) {
-    printf("Enter the name of the client to remove : ");
 }
 
 void filter(Customer *customer, Command command) {

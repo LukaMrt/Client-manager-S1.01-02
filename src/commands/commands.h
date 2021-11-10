@@ -18,8 +18,6 @@ Command parseCommand(const char *entry);
 
 void executeCommand(const char *entry, Customer *customer);
 
-void delete(Customer *customer, Command command);
-
 void filter(Customer *customer, Command command);
 
 void search(Customer *customer, Command command);

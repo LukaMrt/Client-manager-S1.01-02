@@ -12,6 +12,7 @@ add_executable(
         src/commands/add/add.h
         src/commands/add/add.c
         src/commands/delete/delete.h
+        src/commands/delete/delete.c
         src/commands/edit/edit.h
         src/commands/filter/filter.h
         src/commands/load/load.h

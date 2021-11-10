@@ -143,3 +143,6 @@ cmake_install.cmake
 Client_manager_S1_01_02.cbp
 
 Testing/
+.vscode/
+
+Client_manager_S1_01_02

@@ -1,4 +1,4 @@
-#include <printf.h>
+#include <stdio.h>
 #include "show.h"
 
 void show(Customer *customer, Command command) {
