@@ -13,11 +13,18 @@ void show(Customer *customer, Command command) {
     printf("%-25s %-30s %-25s %-16s %-15s %-50s %-35s\n", "Name", "Surname", "City", "Postal code", "Phone", "Email", "Job");
 
     do {
-        printf("%-25s %-30s %-25s %-16d %-15s %-50s %-35s\n",
+
+        char postalCode[16] = "\0\0\0\0\0\0";
+
+        if (customer->postalCode != 0) {
+            sprintf(postalCode, "%d", customer->postalCode);
+        }
+
+        printf("%-25s %-30s %-25s %-16s %-15s %-50s %-35s\n",
                customer->name,
                customer->surname,
                customer->city,
-               customer->postalCode,
+               postalCode,
                customer->phone,
                customer->email,
                customer->job);

@@ -1,15 +1,12 @@
 #include <stdio.h>
-#include <stdbool.h>
 #include "src/commands/commands.h"
 #include "src/utils/utils.h"
-
-bool shouldStop(const char *entry);
 
 int main() {
 
     printf("  ~~~ Client manager ~~~ \n");
-    char *entry;
 
+    char *entry;
     Customer customer = createCustomer();
 
     do {
@@ -18,22 +15,7 @@ int main() {
         entry = scanString();
         executeCommand(entry, &customer);
 
-    } while (!shouldStop(entry));
+    } while (!compareStrings(entry, "exit", 20));
 
     return 0;
-}
-
-bool shouldStop(const char *entry) {
-
-    char exit[] = {'e', 'x', 'i', 't'};
-
-    for (int i = 0; i < 4; ++i) {
-
-        if (entry[i] != exit[i]) {
-            return false;
-        }
-
-    }
-
-    return true;
 }
