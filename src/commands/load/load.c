@@ -14,8 +14,8 @@ void load(Customer *customer, Command command) {
     for (int i = 0; i < command.optionsCount; ++i) {
         Option option = command.options[i];
 
-        if (compareStrings(reformatString(option.name), "-file", 20) ||
-            compareStrings(reformatString(option.name), "-f", 20)) {
+        if (compareStrings(reformatString(option.name), "-file", 50) ||
+            compareStrings(reformatString(option.name), "-f", 50)) {
             fileName = reformatString(option.value);
         }
 
@@ -32,17 +32,7 @@ void load(Customer *customer, Command command) {
         return;
     }
 
-    Customer defaultCustomer = {
-            "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
-            "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
-            "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
-            -1,
-            "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
-            "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
-            "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
-            NULL
-    };
-    *customer = defaultCustomer;
+    *customer = createCustomer();
 
     Customer *last = customer;
 
@@ -50,31 +40,31 @@ void load(Customer *customer, Command command) {
 
         char c;
 
-        char name[20] = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
-        char surname[20] = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
-        char city[20] = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
+        char name[25] = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
+        char surname[30] = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
+        char city[25] = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
         int postalCode = 0;
-        char phone[20] = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
-        char email[20] = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
-        char job[20] = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
+        char phone[15] = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
+        char email[50] = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
+        char job[35] = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
 
         int i = 0;
         while (shouldContinue(file, &c)) {
-            if (i < 19) {
+            if (i < 24) {
                 name[i++] = c;
             }
         }
 
         i = 0;
         while (shouldContinue(file, &c)) {
-            if (i < 19) {
+            if (i < 29) {
                 surname[i++] = c;
             }
         }
 
         i = 0;
         while (shouldContinue(file, &c)) {
-            if (i < 19) {
+            if (i < 24) {
                 city[i++] = c;
             }
         }
@@ -86,21 +76,21 @@ void load(Customer *customer, Command command) {
 
         i = 0;
         while (shouldContinue(file, &c)) {
-            if (i < 19) {
+            if (i < 14) {
                 phone[i++] = c;
             }
         }
 
         i = 0;
         while (shouldContinue(file, &c)) {
-            if (i < 19) {
+            if (i < 49) {
                 email[i++] = c;
             }
         }
 
         i = 0;
         while (shouldContinue(file, &c)) {
-            if (i < 19) {
+            if (i < 34) {
                 job[i++] = c;
             }
         }
@@ -115,16 +105,7 @@ void load(Customer *customer, Command command) {
             continue;
         }
 
-        Customer newCustomer = {
-                .name = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
-                .surname = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
-                .city = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
-                .postalCode = -1,
-                .phone = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
-                .email = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
-                .job = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
-                .next = NULL
-        };
+        Customer newCustomer = createCustomer();
 
         if (last->postalCode == -1) {
             *last = newCustomer;

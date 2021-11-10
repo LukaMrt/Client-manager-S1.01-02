@@ -5,7 +5,7 @@
 
 typedef struct option {
     char name[20];
-    char value[20];
+    char value[50];
 } Option;
 
 typedef struct command {

@@ -4,13 +4,13 @@
 typedef struct customer Customer;
 
 struct customer {
-    char name[20];
-    char surname[20];
-    char city[20];
+    char name[25];
+    char surname[30];
+    char city[25];
     int postalCode;
-    char phone[20];
-    char email[20];
-    char job[20];
+    char phone[15];
+    char email[50];
+    char job[35];
     Customer *next;
 };
 

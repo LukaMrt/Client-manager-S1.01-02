@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <string.h>
-#include <stdbool.h>
 #include "../../data.h"
 #include "../commands.h"
 #include "delete.h"
@@ -31,16 +30,7 @@ void delete(Customer *customer, Command command) {
     after = current->next;
     before->next = after;
 
-    Customer newCustomer = {
-            .name = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
-            .surname = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
-            .city = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
-            .postalCode = -1,
-            .phone = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
-            .email = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
-            .job = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
-            .next = NULL
-    };
+    Customer newCustomer = createCustomer();
 
     if (after == NULL) {
         after = &newCustomer;

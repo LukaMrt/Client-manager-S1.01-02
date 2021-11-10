@@ -10,10 +10,10 @@ void show(Customer *customer, Command command) {
 
     printf("Here is the customers list :\n\n");
 
-    printf("%-19s %-19s %-19s %-19s %-19s %-19s %-19s\n", "Name", "Surname", "City", "Postal code", "Phone", "Email", "Job");
+    printf("%-25s %-30s %-25s %-16s %-15s %-50s %-35s\n", "Name", "Surname", "City", "Postal code", "Phone", "Email", "Job");
 
     do {
-        printf("%-19s %-19s %-19s %-19d %-19s %-19s %-19s\n",
+        printf("%-25s %-30s %-25s %-16d %-15s %-50s %-35s\n",
                customer->name,
                customer->surname,
                customer->city,

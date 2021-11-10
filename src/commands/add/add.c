@@ -4,52 +4,44 @@
 #include "../../data.h"
 #include "../commands.h"
 #include "add.h"
+#include "../../utils/utils.h"
 
-void format(char name[20]);
+void format(char *name, int size);
 
 void add(Customer *customer, Command command) {
-    char name[20], surname[20], city[20], phone[20], email[20], job[20];
+    char name[25], surname[30], city[25], phone[15], email[50], job[35];
     int postalCode;
 
     printf("Enter the name of the new customer to add : ");
-    fgets(name, 20, stdin);
+    fgets(name, 25, stdin);
 
     printf("Enter the surname of the new customer : ");
-    fgets(surname, 20, stdin);
+    fgets(surname, 30, stdin);
 
     printf("Enter the city of the new customer : ");
-    fgets(city, 20, stdin);
+    fgets(city, 25, stdin);
 
     printf("Enter the postal code of the new customer : ");
     scanf("%d", &postalCode); // TODO : check if the postal code is valid
     getchar();
 
     printf("Enter the phone number of the new customer : ");
-    fgets(phone, 20, stdin);
+    fgets(phone, 15, stdin);
 
     printf("Enter the email of the new customer : ");
-    fgets(email, 20, stdin);
+    fgets(email, 50, stdin);
 
     printf("Enter the job of the new customer : ");
-    fgets(job, 20, stdin);
+    fgets(job, 35, stdin);
 
-    Customer newCustomer = {
-            .name = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
-            .surname = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
-            .city = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
-            .postalCode = -1,
-            .phone = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
-            .email = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
-            .job = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
-            .next = NULL
-    };
+    Customer newCustomer = createCustomer();
 
-    format(name);
-    format(surname);
-    format(city);
-    format(phone);
-    format(email);
-    format(job);
+    format(name, 25);
+    format(surname, 30);
+    format(city, 25);
+    format(phone, 15);
+    format(email, 50);
+    format(job, 35);
 
     if (customer->postalCode == -1) {
         *customer = newCustomer;
@@ -86,9 +78,9 @@ void add(Customer *customer, Command command) {
     printf("Customer has been added successfully\n");
 }
 
-void format(char name[20]) {
+void format(char *name, int size) {
 
-    for (int i = 0; i < 20; ++i) {
+    for (int i = 0; i < size; ++i) {
         if (name[i] == '\n') {
             name[i] = '\0';
         }
