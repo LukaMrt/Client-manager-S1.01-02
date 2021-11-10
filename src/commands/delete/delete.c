@@ -4,8 +4,7 @@
 #include "../../data.h"
 #include "../commands.h"
 #include "delete.h"
-
-bool compareStrings(const char name[20], const char name1[20]);
+#include "../../utils/utils.h"
 
 void delete(Customer *customer, Command command) {
 
@@ -17,14 +16,14 @@ void delete(Customer *customer, Command command) {
     Customer *before = customer;
     Customer *after;
 
-    while (!compareStrings(current->name, name) && current->next != NULL && current->postalCode != -1) {
+    while (!compareStrings(current->name, name, 20) && current->next != NULL && current->postalCode != -1) {
         if (before != current) {
             before = before->next;
         }
         current = current->next;
     }
 
-    if (!compareStrings(current->name, name)) {
+    if (!compareStrings(current->name, name, 20)) {
         printf("Customer not found.\n");
         return;
     }
@@ -52,16 +51,4 @@ void delete(Customer *customer, Command command) {
     }
 
     printf("Customer deleted successfully.\n");
-}
-
-bool compareStrings(const char name[20], const char name1[20]) {
-
-    int i;
-    for (i = 0; i < 20 && name1[i] != '\n'; ++i) {
-        if (name[i] != name1[i]) {
-            return false;
-        }
-    }
-
-    return true;
 }

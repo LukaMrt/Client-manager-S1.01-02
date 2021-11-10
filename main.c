@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
-#include <stdlib.h>
 #include "src/commands/commands.h"
-
-char *scanString();
+#include "src/utils/utils.h"
 
 bool shouldStop(const char *entry);
 
@@ -32,33 +30,6 @@ int main() {
     } while (!shouldStop(entry));
 
     return 0;
-}
-
-char *scanString() {
-    size_t size = 10;
-    size_t index = 0;
-    char *entry;
-    int entryChar;
-
-    entry = realloc(NULL, size);
-    if (!entry) {
-        return entry;
-    }
-
-    while ((entryChar = fgetc(stdin)) != '\n') {
-        entry[index++] = (char) entryChar;
-
-        if (index == size) {
-            entry = realloc(entry, size += 16);
-            if (!entry) {
-                return entry;
-            }
-        }
-
-    }
-
-    entry[index] = '\0';
-    return entry;
 }
 
 bool shouldStop(const char *entry) {

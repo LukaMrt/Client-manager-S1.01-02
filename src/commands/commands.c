@@ -12,8 +12,8 @@ void executeCommand(const char *entry, Customer *customer) {
 
     int result = 0;
 
-    for (int i = 0; entry[i] != '\0'; ++i) {
-        result += (int) entry[i];
+    for (int i = 0; command.name[i] != '\0'; ++i) {
+        result += (int) command.name[i];
     }
 
 //    printf("Commande %s => %d\n", command.name, result);
@@ -61,7 +61,7 @@ void executeCommand(const char *entry, Customer *customer) {
             break;
 
         default:
-            printf("Cette commande n'existe pas\n");
+            printf("La commande %s n'existe pas.\n", command.name);
             break;
     }
 }
