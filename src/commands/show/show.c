@@ -2,6 +2,13 @@
 #include "show.h"
 
 /**
+ * Format postalCode from int to string.
+ * @param postalCode string variable.
+ * @param postalCodeInt original int variable.
+ */
+void formatPostalCode(char *postalCode, int postalCodeInt);
+
+/**
  * Displays customers list.
  * @param customer head of the customers list.
  * @param command command to execute.
@@ -9,23 +16,30 @@
 void show(Customer *customer, Command command) {
 
     if (customer->postalCode == -1) {
-        printf("No customers found.\n");
+        printf("No customer found.\n");
         return;
     }
 
     printf("Here is the customers list :\n\n");
+    printf("      %-25s %-30s %-25s %-13s %-16s %-50s %-35s\n",
+           "Name",
+           "Surname",
+           "City",
+           "Postal code",
+           "Phone",
+           "Email",
+           "Job");
 
-    printf("%-25s %-30s %-25s %-16s %-15s %-50s %-35s\n", "Name", "Surname", "City", "Postal code", "Phone", "Email", "Job");
-
+    int i = 1;
+    
     do {
 
-        char postalCode[16] = "\0\0\0\0\0\0";
+        char postalCode[13] = "\0\0\0\0\0\0\0\0\0\0\0\0\0";
 
-        if (customer->postalCode != 0) {
-            sprintf(postalCode, "%d", customer->postalCode);
-        }
+        formatPostalCode(postalCode, customer->postalCode);
 
-        printf("%-25s %-30s %-25s %-16s %-15s %-50s %-35s\n",
+        printf("%-5d %-25s %-30s %-25s %-13s %-16s %-50s %-35s\n",
+               i++,
                customer->name,
                customer->surname,
                customer->city,
@@ -34,7 +48,14 @@ void show(Customer *customer, Command command) {
                customer->email,
                customer->job);
 
-        customer = customer->next;
-    } while (customer != NULL);
+    } while ((customer = customer->next) != NULL);
 
+}
+
+void formatPostalCode(char *postalCode, int postalCodeInt) {
+    
+    if (postalCodeInt != 0) {
+        sprintf(postalCode, "%d", postalCodeInt);
+    }
+    
 }

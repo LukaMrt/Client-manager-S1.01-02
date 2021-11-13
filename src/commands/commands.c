@@ -58,12 +58,12 @@ void executeCommand(const char *entry, Customer *customer) {
             load(customer, command);
             break;
 
-        case 449:
+        case 758: // display
+        case 449: // show
             show(customer, command);
             break;
 
         case 442: // exit
-            printf("  ~~~ Client manager ~~~ \n");
             break;
 
         default:

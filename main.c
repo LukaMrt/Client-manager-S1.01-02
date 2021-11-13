@@ -22,5 +22,7 @@ int main() {
 
     } while (!compareStrings(entry, "exit", 20));
 
+    printf("  ~~~ Client manager ~~~ \n");
+
     return 0;
 }
