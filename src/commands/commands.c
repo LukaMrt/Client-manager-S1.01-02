@@ -6,6 +6,7 @@
 #include "load/load.h"
 #include "delete/delete.h"
 #include "filter/filter.h"
+#include "save/save.h"
 
 /**
  * Executes the options given by the user.
@@ -136,8 +137,4 @@ void sort(Customer *customer, Command command) {
 
 void edit(Customer *customer, Command command) {
     printf("Enter the name of the customer to edit : ");
-}
-
-void save(Customer *customer, Command command) {
-    printf("Enter the file where customers will be stored : ");
 }
