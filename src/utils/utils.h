@@ -6,11 +6,15 @@
 
 char *scanString();
 
-char *reformatString(const char *entry);
+char *cleanString(const char *entry);
 
-void format(char *entry, int size);
+void formatString(char *entry, int size);
 
 bool compareStrings(const char *name, const char *name1, int size);
+
+void copyString(char *dest, const char *src, int size);
+
+void toUpperCase(char *entry);
 
 Customer createCustomer();
 

@@ -20,9 +20,9 @@ void load(Customer *customer, Command command) {
     for (int i = 0; i < command.optionsCount; ++i) {
         Option option = command.options[i];
 
-        if (compareStrings(reformatString(option.name), "-file", 50) ||
-            compareStrings(reformatString(option.name), "-f", 50)) {
-            fileName = reformatString(option.value);
+        if (compareStrings(cleanString(option.name), "-file", 50) ||
+            compareStrings(cleanString(option.name), "-f", 50)) {
+            fileName = cleanString(option.value);
         }
 
     }

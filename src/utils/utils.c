@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include "utils.h"
 
 /**
@@ -38,7 +39,7 @@ char *scanString() {
  * @param entry string to be cleaned.
  * @return cleaned string.
  */
-char *reformatString(const char *entry) {
+char *cleanString(const char *entry) {
     size_t size = 10;
     size_t index = 0;
     char *output;
@@ -67,10 +68,10 @@ char *reformatString(const char *entry) {
 
 /**
  * Formats entry to remove new lines characters.
- * @param entry Entry to format.
+ * @param entry Entry to formatString.
  * @param size Size of entry.
  */
-void format(char *entry, int size) {
+void formatString(char *entry, int size) {
 
     for (int i = 0; i < size; ++i) {
         if (entry[i] == '\n') {
@@ -97,6 +98,43 @@ bool compareStrings(const char *name, const char *name1, int size) {
     }
 
     return true;
+}
+
+/**
+ * Copy a string.
+ * @param dest destination string.
+ * @param src source string.
+ * @param size destination size.
+ */
+void copyString(char *dest, const char *src, int size) {
+
+    int i;
+
+    for (i = 0; i < (size - 1); ++i) {
+        dest[i] = src[i];
+        if (src[i] == '\0') {
+            break;
+        }
+    }
+
+    for (; i < size; ++i) {
+        dest[i] = '\0';
+    }
+
+}
+
+/**
+ * Edit a string to upper case.
+ * @param entry string to be edited.
+ */
+void toUpperCase(char *entry) {
+
+    int i;
+
+    for (i = 0; entry[i] != '\0'; ++i) {
+        entry[i] = toupper(entry[i]);
+    }
+
 }
 
 /**
