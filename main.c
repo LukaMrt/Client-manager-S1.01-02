@@ -20,7 +20,11 @@ int main() {
         entry = scanString();
         executeCommand(entry, &customer);
 
-    } while (!compareStrings(entry, "exit", 20));
+    } while (!compareStrings(entry, "exit", 20)
+             && !compareStrings(entry, "quit", 20)
+             && !compareStrings(entry, "stop", 20)
+             && !compareStrings(entry, "end", 20)
+             && !compareStrings(entry, "q", 20));
 
     printf("  ~~~ Client manager ~~~ \n");
 

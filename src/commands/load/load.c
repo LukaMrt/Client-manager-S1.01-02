@@ -27,7 +27,7 @@ void load(Customer *customer, Command command) {
 
     }
 
-    if (strlen(fileName) == 0) {
+    while (strlen(fileName) == 0) {
         printf("Enter the file where customers are stored : ");
         fileName = scanString();
     }

@@ -23,4 +23,6 @@ add_executable(
         src/commands/sort/sort.h
         src/commands/show/show.h
         src/commands/show/show.c
-        src/utils/utils.h src/utils/utils.c src/commands/save/save.c src/commands/file/file.h src/commands/file/file.c)
+        src/utils/utils.h
+        src/utils/utils.c
+        src/commands/save/save.c src/utils/customersUtils.h src/utils/customersUtils.c)

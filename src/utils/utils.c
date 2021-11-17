@@ -116,3 +116,22 @@ Customer createCustomer() {
     };
     return defaultCustomer;
 }
+
+/**
+ * Check if a string is not a number.
+ * @param value string to be checked.
+ * @return true if string is not a number, false otherwise.
+ */
+bool isNotNumber(char *entry) {
+
+    while (*entry != '\0') {
+
+        if (*entry < '0' || '9' < *entry) {
+            return true;
+        }
+
+        ++entry;
+    }
+
+    return false;
+}

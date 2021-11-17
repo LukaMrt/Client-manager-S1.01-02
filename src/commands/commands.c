@@ -65,6 +65,10 @@ void executeCommand(const char *entry, Customer *customer) {
             break;
 
         case 442: // exit
+        case 451: // quit
+        case 454: // stop
+        case 311: // end
+        case 113: // q
             break;
 
         default:

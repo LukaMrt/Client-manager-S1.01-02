@@ -14,4 +14,6 @@ bool compareStrings(const char *name, const char *name1, int size);
 
 Customer createCustomer();
 
+bool isNotNumber(char *entry);
+
 #endif //CLIENT_MANAGER_S1_01_02_UTILS_H
