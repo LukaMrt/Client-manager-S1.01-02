@@ -19,14 +19,14 @@ void show(Customer *customer, Command command) {
     for (int i = 0; i < command.optionsCount; ++i) {
         Option option = command.options[i];
 
-        if (compareStrings(reformatString(option.name), "-filterField", 50) ||
-            compareStrings(reformatString(option.name), "-f", 50)) {
-            filterField = reformatString(option.value);
+        if (compareStrings(cleanString(option.name), "-filter", 50) ||
+            compareStrings(cleanString(option.name), "-f", 50)) {
+            filterField = cleanString(option.value);
         }
 
-        if (compareStrings(reformatString(option.name), "-filterValue", 50) ||
-            compareStrings(reformatString(option.name), "-v", 50)) {
-            filterValue = reformatString(option.value);
+        if (compareStrings(cleanString(option.name), "-filter", 50) ||
+            compareStrings(cleanString(option.name), "-v", 50)) {
+            filterValue = cleanString(option.value);
         }
 
     }
@@ -100,7 +100,7 @@ void showList(Customer *customer, char *word) {
     }
 
     printf("Here is the %s customers list :\n\n", word);
-    printf("%-5s %-25s %-30s %-25s %-13s %-16s %-50s %-35s\n",
+    printf("%-6s %-25s %-30s %-25s %-13s %-16s %-50s %-35s\n",
            "",
            "Name",
            "Surname",
@@ -120,7 +120,7 @@ void showList(Customer *customer, char *word) {
             sprintf(postalCode, "%d", customer->postalCode);
         }
 
-        printf("%-5d %-25s %-30s %-25s %-13s %-16s %-50s %-35s\n",
+        printf("%-6d %-25s %-30s %-25s %-13s %-16s %-50s %-35s\n",
                i++,
                customer->name,
                customer->surname,

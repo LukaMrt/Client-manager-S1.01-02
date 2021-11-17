@@ -15,12 +15,12 @@ bool validPhoneNumber(char phone[15]);
  * @param command command to execute.
  */
 void add(Customer *customer, Command command) {
-    char name[25] = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
-    char surname[30] = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
-    char city[25] = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
-    char phone[15] = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
-    char email[50] = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
-    char job[35] = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
+    char name[NAME_SIZE] = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
+    char surname[SURNAME_SIZE] = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
+    char city[CITY_SIZE] = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
+    char phone[PHONE_SIZE] = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
+    char email[EMAIL_SIZE] = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
+    char job[JOB_SIZE] = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
     int postalCode = 0;
 
     for (int i = 0; i < command.optionsCount; ++i) {
@@ -28,17 +28,17 @@ void add(Customer *customer, Command command) {
 
         if (compareStrings(cleanString(option.name), "-name", 50) ||
             compareStrings(cleanString(option.name), "-n", 50)) {
-            copyString(name, option.value, 25);
+            copyString(name, option.value, NAME_SIZE);
         }
 
         if (compareStrings(cleanString(option.name), "-surname", 50) ||
             compareStrings(cleanString(option.name), "-s", 50)) {
-            copyString(surname, option.value, 30);
+            copyString(surname, option.value, SURNAME_SIZE);
         }
 
         if (compareStrings(cleanString(option.name), "-city", 50) ||
             compareStrings(cleanString(option.name), "-c", 50)) {
-            copyString(city, option.value, 25);
+            copyString(city, option.value, CITY_SIZE);
         }
 
         if (compareStrings(cleanString(option.name), "-postal", 50) ||
@@ -48,36 +48,36 @@ void add(Customer *customer, Command command) {
 
         if (compareStrings(cleanString(option.name), "-phone", 50) ||
             compareStrings(cleanString(option.name), "-ph", 50)) {
-            copyString(phone, option.value, 15);
+            copyString(phone, option.value, PHONE_SIZE);
         }
 
         if (compareStrings(cleanString(option.name), "-email", 50) ||
             compareStrings(cleanString(option.name), "-e", 50)) {
-            copyString(email, option.value, 50);
+            copyString(email, option.value, EMAIL_SIZE);
         }
 
         if (compareStrings(cleanString(option.name), "-job", 50) ||
             compareStrings(cleanString(option.name), "-j", 50)) {
-            copyString(job, option.value, 35);
+            copyString(job, option.value, JOB_SIZE);
         }
 
     }
 
     if (strlen(name) == 0) {
         printf("Enter the name of the new customer to add : ");
-        fgets(name, 25, stdin);
+        fgets(name, NAME_SIZE, stdin);
         fseek(stdin, 0, SEEK_END);
     }
 
     if (strlen(surname) == 0) {
         printf("Enter the surname of the new customer : ");
-        fgets(surname, 30, stdin);
+        fgets(surname, SURNAME_SIZE, stdin);
         fseek(stdin, 0, SEEK_END);
     }
 
     if (strlen(city) == 0) {
         printf("Enter the city of the new customer : ");
-        fgets(city, 25, stdin);
+        fgets(city, CITY_SIZE, stdin);
         fseek(stdin, 0, SEEK_END);
     }
 
@@ -89,32 +89,32 @@ void add(Customer *customer, Command command) {
 
     while (strlen(phone) == 0 || !validPhoneNumber(phone)) {
         printf("Enter the phone number of the new customer : ");
-        fgets(phone, 15, stdin);
+        fgets(phone, PHONE_SIZE, stdin);
         formatString(phone, 15);
         fseek(stdin, 0, SEEK_END);
     }
 
     if (strlen(email) == 0) {
         printf("Enter the email of the new customer : ");
-        fgets(email, 50, stdin);
+        fgets(email, EMAIL_SIZE, stdin);
         fseek(stdin, 0, SEEK_END);
     }
 
     if (strlen(job) == 0) {
         printf("Enter the job of the new customer : ");
-        fgets(job, 35, stdin);
+        fgets(job, JOB_SIZE, stdin);
         fseek(stdin, 0, SEEK_END);
     }
 
     Customer newCustomer = createCustomer();
 
     toUpperCase(city);
-    formatString(name, 25);
-    formatString(surname, 30);
-    formatString(city, 25);
-    formatString(phone, 15);
-    formatString(email, 50);
-    formatString(job, 35);
+    formatString(name, NAME_SIZE);
+    formatString(surname, SURNAME_SIZE);
+    formatString(city, CITY_SIZE);
+    formatString(phone, PHONE_SIZE);
+    formatString(email, EMAIL_SIZE);
+    formatString(job, JOB_SIZE);
 
     Customer *current = customer;
 
