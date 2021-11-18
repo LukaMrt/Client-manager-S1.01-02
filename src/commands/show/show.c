@@ -24,7 +24,7 @@ void show(Customer *customer, Command command) {
             filterField = cleanString(option.value);
         }
 
-        if (compareStrings(cleanString(option.name), "-filter", 50) ||
+        if (compareStrings(cleanString(option.name), "-value", 50) ||
             compareStrings(cleanString(option.name), "-v", 50)) {
             filterValue = cleanString(option.value);
         }
@@ -37,7 +37,7 @@ void show(Customer *customer, Command command) {
     }
 
     while (strlen(filterValue) == 0) {
-        printf("Enter the filterValue of the field %s for the filterField : ", filterField);
+        printf("Enter the value of the field %s for the fitler : ", filterField);
         filterValue = scanString();
     }
 
@@ -61,7 +61,7 @@ void show(Customer *customer, Command command) {
         || compareStrings(filterField, "postal_code", 12)) {
 
         while (isNotNumber(filterValue)) {
-            printf("Enter the filterValue of the field postalCode for the filterField : ");
+            printf("Enter the value of the field postalCode for the filter : ");
             filterValue = scanString();
         }
 

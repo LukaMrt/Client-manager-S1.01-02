@@ -7,6 +7,7 @@
 #include "delete/delete.h"
 #include "filter/filter.h"
 #include "save/save.h"
+#include "help/help.h"
 
 /**
  * Executes the options given by the user.
@@ -62,6 +63,10 @@ void executeCommand(const char *entry, Customer *customer) {
         case 758: // display
         case 449: // show
             show(customer, command);
+            break;
+
+        case 425:
+            help(customer, command);
             break;
 
         case 442: // exit
