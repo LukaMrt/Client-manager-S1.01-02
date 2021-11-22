@@ -19,20 +19,32 @@ void show(Customer *customer, Command command) {
     for (int i = 0; i < command.optionsCount; ++i) {
         Option option = command.options[i];
 
-        if (compareStrings(cleanString(option.name), "-filter", 50) ||
-            compareStrings(cleanString(option.name), "-f", 50)) {
+        if (compareStrings(cleanString(option.name), "-filter", 8) ||
+            compareStrings(cleanString(option.name), "-f", 3)) {
             filterField = cleanString(option.value);
         }
 
-        if (compareStrings(cleanString(option.name), "-value", 50) ||
-            compareStrings(cleanString(option.name), "-v", 50)) {
+        if (compareStrings(cleanString(option.name), "-value", 7) ||
+            compareStrings(cleanString(option.name), "-v", 3)) {
             filterValue = cleanString(option.value);
+        }
+
+        if (compareStrings(cleanString(option.name), "-incomplete", 12) ||
+            compareStrings(cleanString(option.name), "-i", 3)) {
+            showIncomplete(customer);
+            return;
+        }
+
+        if (compareStrings(cleanString(option.name), "-complete", 10) ||
+            compareStrings(cleanString(option.name), "-c", 3)) {
+            showComplete(customer);
+            return;
         }
 
     }
 
     if (strlen(filterField) == 0) {
-        showList(customer, "");
+        showList(customer, "Here is the customers list :\n\n");
         return;
     }
 
@@ -92,14 +104,14 @@ void show(Customer *customer, Command command) {
  * @param phoneNumber string variable.
  * @param phoneNumberInt original int variable.
  */
-void showList(Customer *customer, char *word) {
+void showList(Customer *customer, char *sentence) {
 
     if (customer == NULL || customer->postalCode == -1) {
         printf("No customer found.\n");
         return;
     }
 
-    printf("Here is the %s customers list :\n\n", word);
+    printf("%s", sentence);
     printf("%-6s %-25s %-30s %-25s %-13s %-16s %-50s %-35s\n",
            "",
            "Name",
@@ -171,5 +183,81 @@ void showFilter(Customer *customer, char *value, bool (*fieldComparator)(Custome
 
     } while ((current = current->next) != NULL && current->postalCode != -1);
 
-    showList(&copy, "filtered");
+    showList(&copy, "Here is the filtered customers list :\n\n");
+}
+
+/**
+ * Filter customers with missing value.
+ * @param customer head of the customers list.
+ */
+void showIncomplete(Customer *customer) {
+
+    if (customer == NULL || customer->postalCode == -1) {
+        showList(customer, "");
+        return;
+    }
+
+    Customer *current = customer;
+    Customer copy = createCustomer();
+    Customer *copyCurrent = &copy;
+
+    do {
+
+        if (!hasMissingData(current)) {
+            continue;
+        }
+
+        Customer newCustomer = createCustomer();
+        copyCurrent->next = (Customer *) malloc(sizeof(Customer));
+        *(copyCurrent->next) = newCustomer;
+        strcpy(copyCurrent->name, current->name);
+        strcpy(copyCurrent->surname, current->surname);
+        strcpy(copyCurrent->city, current->city);
+        copyCurrent->postalCode = current->postalCode;
+        strcpy(copyCurrent->phone, current->phone);
+        strcpy(copyCurrent->email, current->email);
+        strcpy(copyCurrent->job, current->job);
+        copyCurrent = copyCurrent->next;
+
+    } while ((current = current->next) != NULL && current->postalCode != -1);
+
+    showList(&copy, "Here is the list of customers with missing values :\n\n");
+}
+
+/**
+ * Filter customers without missing value.
+ * @param customer head of the customers list.
+ */
+void showComplete(Customer *customer) {
+
+    if (customer == NULL || customer->postalCode == -1) {
+        showList(customer, "");
+        return;
+    }
+
+    Customer *current = customer;
+    Customer copy = createCustomer();
+    Customer *copyCurrent = &copy;
+
+    do {
+
+        if (hasMissingData(current)) {
+            continue;
+        }
+
+        Customer newCustomer = createCustomer();
+        copyCurrent->next = (Customer *) malloc(sizeof(Customer));
+        *(copyCurrent->next) = newCustomer;
+        strcpy(copyCurrent->name, current->name);
+        strcpy(copyCurrent->surname, current->surname);
+        strcpy(copyCurrent->city, current->city);
+        copyCurrent->postalCode = current->postalCode;
+        strcpy(copyCurrent->phone, current->phone);
+        strcpy(copyCurrent->email, current->email);
+        strcpy(copyCurrent->job, current->job);
+        copyCurrent = copyCurrent->next;
+
+    } while ((current = current->next) != NULL && current->postalCode != -1);
+
+    showList(&copy, "Here is the list of customers without missing values :\n\n");
 }

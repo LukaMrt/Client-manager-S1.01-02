@@ -17,4 +17,6 @@ bool compareEmail(Customer *customer, char *value);
 
 bool compareJob(Customer *customer, char *value);
 
+bool hasMissingData(const Customer *current);
+
 #endif //CLIENT_MANAGER_S1_01_02_CUSTOMERSUTILS_H

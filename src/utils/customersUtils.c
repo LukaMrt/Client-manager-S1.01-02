@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <string.h>
 #include "../data.h"
 #include "customersUtils.h"
 #include "utils.h"
@@ -71,4 +72,19 @@ bool compareEmail(Customer *customer, char *value) {
  */
 bool compareJob(Customer *customer, char *value) {
     return compareStrings(customer->job, value, JOB_SIZE);
+}
+
+/**
+ * Check if customer has missing data.
+ * @param current customer to check.
+ * @return true if customer has missing data, false otherwise.
+ */
+bool hasMissingData(const Customer *current) {
+    return strlen(current->name) == 0
+           || strlen(current->surname) == 0
+           || strlen(current->city) == 0
+           || current->postalCode == 0
+           || strlen(current->phone) == 0
+           || strlen(current->email) == 0
+           || strlen(current->job) == 0;
 }

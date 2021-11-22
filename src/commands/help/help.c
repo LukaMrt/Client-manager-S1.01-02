@@ -35,9 +35,10 @@ void help(Customer *customer, Command command) {
 
     printf("\nCommand show : display the list of the customers.\n");
     printf("\t-filter, -f : specify the field which will be used to filter the list before display it (without delete users from the list).\n");
+    printf("\t-complete, -c : show only customers without missing data.\n");
+    printf("\t-incomplete, -i : show only customers with missing data.\n");
 
     printf("\nCommand sort : sort customers list by a specific field.\n");
 
     printf("\nCommands exit, quit, stop, end, q : exit the program.\n");
-
 }
