@@ -25,4 +25,4 @@ add_executable(
         src/commands/show/show.c
         src/utils/utils.h
         src/utils/utils.c
-        src/commands/save/save.c src/utils/customersUtils.h src/utils/customersUtils.c src/commands/help/help.h src/commands/help/help.c)
+        src/commands/save/save.c src/utils/customersUtils.h src/utils/customersUtils.c src/commands/help/help.h src/commands/help/help.c src/commands/edit/edit.c)

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <math.h>
 #include "show.h"
 #include "../../utils/utils.h"
 #include "../../utils/customersUtils.h"
@@ -192,6 +193,9 @@ void showFilter(Customer *customer, char *value, bool (*fieldComparator)(Custome
  */
 void showIncomplete(Customer *customer) {
 
+    int a = 0;
+    int b = 0;
+
     if (customer == NULL || customer->postalCode == -1) {
         showList(customer, "");
         return;
@@ -203,9 +207,13 @@ void showIncomplete(Customer *customer) {
 
     do {
 
+        ++b;
+
         if (!hasMissingData(current)) {
             continue;
         }
+
+        ++a;
 
         Customer newCustomer = createCustomer();
         copyCurrent->next = (Customer *) malloc(sizeof(Customer));
@@ -221,6 +229,7 @@ void showIncomplete(Customer *customer) {
 
     } while ((current = current->next) != NULL && current->postalCode != -1);
 
+    printf("%d customers have missing data (%.2f%%).\n", a, roundf((float)(a) * 10000 / (float)(b)) / 100);
     showList(&copy, "Here is the list of customers with missing values :\n\n");
 }
 
@@ -230,6 +239,9 @@ void showIncomplete(Customer *customer) {
  */
 void showComplete(Customer *customer) {
 
+    int a = 0;
+    int b = 0;
+
     if (customer == NULL || customer->postalCode == -1) {
         showList(customer, "");
         return;
@@ -241,9 +253,13 @@ void showComplete(Customer *customer) {
 
     do {
 
+        ++b;
+
         if (hasMissingData(current)) {
             continue;
         }
+
+        ++a;
 
         Customer newCustomer = createCustomer();
         copyCurrent->next = (Customer *) malloc(sizeof(Customer));
@@ -259,5 +275,6 @@ void showComplete(Customer *customer) {
 
     } while ((current = current->next) != NULL && current->postalCode != -1);
 
+    printf("%d customers have no missing data (%.2f%%).\n", a, roundf((float)(a) * 10000 / (float)(b)) / 100);
     showList(&copy, "Here is the list of customers without missing values :\n\n");
 }

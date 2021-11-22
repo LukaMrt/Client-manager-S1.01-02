@@ -8,6 +8,7 @@
 #include "filter/filter.h"
 #include "save/save.h"
 #include "help/help.h"
+#include "edit/edit.h"
 
 /**
  * Executes the options given by the user.
@@ -142,8 +143,4 @@ void search(Customer *customer, Command command) {
 
 void sort(Customer *customer, Command command) {
     printf("Enter the field which will used to process the sort : ");
-}
-
-void edit(Customer *customer, Command command) {
-    printf("Enter the name of the customer to edit : ");
 }

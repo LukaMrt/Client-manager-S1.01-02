@@ -9,7 +9,7 @@
  */
 int main() {
 
-    printf("  ~~~ Client manager ~~~ \n");
+    printf("  ~~~ Customers manager ~~~ \n");
 
     char *entry;
     Customer customer = createCustomer();
@@ -26,7 +26,7 @@ int main() {
              && !compareStrings(entry, "end", 20)
              && !compareStrings(entry, "q", 20));
 
-    printf("  ~~~ Client manager ~~~ \n");
+    printf("  ~~~ Customers manager ~~~ \n");
 
     return 0;
 }
