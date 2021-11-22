@@ -20,4 +20,6 @@ Customer createCustomer();
 
 bool isNotNumber(char *entry);
 
+bool validPhoneNumber(char phone[15]);
+
 #endif //CLIENT_MANAGER_S1_01_02_UTILS_H

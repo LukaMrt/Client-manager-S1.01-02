@@ -173,3 +173,27 @@ bool isNotNumber(char *entry) {
 
     return false;
 }
+
+/**
+ * Check if a string is a phone number.
+ * @param phone string to be checked.
+ * @return true if string is a phone number, false otherwise.
+ */
+bool validPhoneNumber(char phone[15]) {
+
+    return isdigit(phone[0])
+           && isdigit(phone[1])
+           && phone[2] == '.'
+           && isdigit(phone[3])
+           && isdigit(phone[4])
+           && phone[5] == '.'
+           && isdigit(phone[6])
+           && isdigit(phone[7])
+           && phone[8] == '.'
+           && isdigit(phone[9])
+           && isdigit(phone[10])
+           && phone[11] == '.'
+           && isdigit(phone[12])
+           && isdigit(phone[13])
+           && phone[14] == '\0';
+}

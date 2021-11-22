@@ -138,22 +138,3 @@ void add(Customer *customer, Command command) {
     strcpy(current->job, job);
     printf("Customer has been added successfully\n");
 }
-
-bool validPhoneNumber(char phone[15]) {
-
-    return isdigit(phone[0])
-           && isdigit(phone[1])
-           && phone[2] == '.'
-           && isdigit(phone[3])
-           && isdigit(phone[4])
-           && phone[5] == '.'
-           && isdigit(phone[6])
-           && isdigit(phone[7])
-           && phone[8] == '.'
-           && isdigit(phone[9])
-           && isdigit(phone[10])
-           && phone[11] == '.'
-           && isdigit(phone[12])
-           && isdigit(phone[13])
-           && phone[14] == '\0';
-}
