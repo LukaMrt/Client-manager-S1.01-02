@@ -6,6 +6,7 @@
 #include "load/load.h"
 #include "delete/delete.h"
 #include "filter/filter.h"
+#include "search/search.h"
 #include "save/save.h"
 #include "help/help.h"
 #include "edit/edit.h"
@@ -135,12 +136,4 @@ Command parseCommand(const char *entry) {
     }
 
     return command;
-}
-
-void search(Customer *customer, Command command) {
-    printf("Enter the field which will used to process the research : ");
-}
-
-void sort(Customer *customer, Command command) {
-    printf("Enter the field which will used to process the sort : ");
 }

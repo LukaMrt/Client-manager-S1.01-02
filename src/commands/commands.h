@@ -24,8 +24,4 @@ void executeCommand(const char *entry, Customer *customer);
 
 Command parseCommand(const char *entry);
 
-void search(Customer *customer, Command command);
-
-void sort(Customer *customer, Command command);
-
 #endif //CLIENT_MANAGER_S1_01_02_COMMANDS_H

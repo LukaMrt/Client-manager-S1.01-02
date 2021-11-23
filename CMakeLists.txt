@@ -20,7 +20,9 @@ add_executable(
         src/commands/load/load.c
         src/commands/save/save.h
         src/commands/search/search.h
+        src/commands/search/search.c
         src/commands/sort/sort.h
+        src/commands/sort/sort.c
         src/commands/show/show.h
         src/commands/show/show.c
         src/utils/utils.h
