@@ -10,6 +10,7 @@
 #include "save/save.h"
 #include "help/help.h"
 #include "edit/edit.h"
+#include "sort/sort.h"
 
 /**
  * Executes the options given by the user.

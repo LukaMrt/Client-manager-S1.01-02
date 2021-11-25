@@ -77,7 +77,7 @@ void load(Customer *customer, Command command) {
 
         while (shouldContinue(file, &c)) {
             postalCode *= 10;
-            postalCode += (int) c;
+            postalCode += atoi(&c);
         }
 
         i = 0;
