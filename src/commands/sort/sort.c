@@ -11,22 +11,26 @@ void sort(Customer *customer, Command command) {
 
     Customer* head = &(*customer);
 
-    char *sortField = "";
+    char sortField[15] = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
 
     for (int i = 0; i < command.optionsCount; ++i) {
         Option option = command.options[i];
 
-        if (compareStrings(cleanString(option.name), "-sort", 6) ||
-            compareStrings(cleanString(option.name), "-s", 3)) {
-            sortField = cleanString(option.value);
+        if (compareStrings(cleanString(option.name), "-field", 6) ||
+            compareStrings(cleanString(option.name), "-f", 3)) {
+            copyString(sortField, option.value, 15);
         }
 
     }
 
     while (strlen(sortField) == 0) {
         printf("Enter field to sort by: ");
-        scanf("%s", sortField);
+        fgets(sortField, 15, stdin);
+        fseek(stdin, 0, SEEK_END);
     }
+
+    formatString(sortField, 15);
+    cleanString(sortField);
 
     if (compareStrings(sortField, "name", 6)) {
         mergeSort(&head, &compareNames);

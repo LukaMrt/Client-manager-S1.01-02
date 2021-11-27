@@ -20,7 +20,7 @@ void show(Customer *customer, Command command) {
     for (int i = 0; i < command.optionsCount; ++i) {
         Option option = command.options[i];
 
-        if (compareStrings(cleanString(option.name), "-filter", 8) ||
+        if (compareStrings(cleanString(option.name), "-field", 7) ||
             compareStrings(cleanString(option.name), "-f", 3)) {
             filterField = cleanString(option.value);
         }

@@ -74,6 +74,9 @@ char *cleanString(const char *entry) {
 void formatString(char *entry, int size) {
 
     for (int i = 0; i < size; ++i) {
+        if (entry[i] == '\0') {
+            return;
+        }
         if (entry[i] == '\n') {
             entry[i] = '\0';
         }
