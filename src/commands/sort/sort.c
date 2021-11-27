@@ -9,7 +9,7 @@
 
 void sort(Customer *customer, Command command) {
 
-    Customer* head = &(*customer);
+    Customer* head = customer;
 
     char sortField[15] = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
 

@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include "show.h"
+#include "../sort/sort.h"
 #include "../../utils/utils.h"
 #include "../../utils/customersUtils.h"
 
@@ -15,19 +16,25 @@
 void show(Customer *customer, Command command) {
 
     char *filterField = "";
-    char *filterValue = "";
+    char *sortField = "";
+    char *value = "";
 
     for (int i = 0; i < command.optionsCount; ++i) {
         Option option = command.options[i];
 
-        if (compareStrings(cleanString(option.name), "-field", 7) ||
+        if (compareStrings(cleanString(option.name), "-filter", 8) ||
             compareStrings(cleanString(option.name), "-f", 3)) {
             filterField = cleanString(option.value);
         }
 
+        if (compareStrings(cleanString(option.name), "-sort", 6) ||
+            compareStrings(cleanString(option.name), "-s", 3)) {
+            sortField = cleanString(option.value);
+        }
+
         if (compareStrings(cleanString(option.name), "-value", 7) ||
             compareStrings(cleanString(option.name), "-v", 3)) {
-            filterValue = cleanString(option.value);
+            value = cleanString(option.value);
         }
 
         if (compareStrings(cleanString(option.name), "-incomplete", 12) ||
@@ -44,28 +51,44 @@ void show(Customer *customer, Command command) {
 
     }
 
-    if (strlen(filterField) == 0) {
-        showList(customer, "Here is the customers list :\n\n");
+    if (strlen(filterField) != 0) {
+        filterOption(customer, filterField, value);
         return;
     }
 
-    while (strlen(filterValue) == 0) {
-        printf("Enter the value of the field %s for the fitler : ", filterField);
-        filterValue = scanString();
+    if (strlen(sortField) != 0) {
+        sortOption(customer, sortField);
+        return;
+    }
+
+    showList(customer, "Here is the customers list :\n\n");
+}
+
+/**
+ * Display customers list filtered by a field.
+ * @param customer head of the customers list.
+ * @param filterField field to filter by.
+ * @param value value to filter by.
+ */
+void filterOption(Customer *customer, char *filterField, char *value) {
+
+    while (strlen(value) == 0) {
+        printf("Enter the value of the field %s for the filter : ", filterField);
+        value = scanString();
     }
 
     if (compareStrings(filterField, "name", 6)) {
-        showFilter(customer, filterValue, &compareName);
+        showFilter(customer, value, &compareName);
         return;
     }
 
     if (compareStrings(filterField, "surname", 7)) {
-        showFilter(customer, filterValue, &compareSurname);
+        showFilter(customer, value, &compareSurname);
         return;
     }
 
     if (compareStrings(filterField, "city", 5)) {
-        showFilter(customer, filterValue, &compareCity);
+        showFilter(customer, value, &compareCity);
         return;
     }
 
@@ -73,31 +96,80 @@ void show(Customer *customer, Command command) {
         || compareStrings(filterField, "postal", 7)
         || compareStrings(filterField, "postal_code", 12)) {
 
-        while (isNotNumber(filterValue)) {
+        while (isNotNumber(value)) {
             printf("Enter the value of the field postalCode for the filter : ");
-            filterValue = scanString();
+            value = scanString();
         }
 
-        showFilter(customer, filterValue, &comparePostalCode);
+        showFilter(customer, value, &comparePostalCode);
         return;
     }
 
     if (compareStrings(filterField, "phone", 6)) {
-        showFilter(customer, filterValue, &comparePhone);
+        showFilter(customer, value, &comparePhone);
         return;
     }
 
     if (compareStrings(filterField, "email", 6)) {
-        showFilter(customer, filterValue, &compareEmail);
+        showFilter(customer, value, &compareEmail);
         return;
     }
 
     if (compareStrings(filterField, "job", 4)) {
-        showFilter(customer, filterValue, &compareJob);
+        showFilter(customer, value, &compareJob);
         return;
     }
 
-    printf("Le champs %s n'existe pas.", filterField);
+    printf("The field %s doesn't exist.\n", filterField);
+}
+
+/**
+ * Display customers list sorted by a field.
+ * @param customer head of the customers list.
+ * @param sortField field to sort by.
+ * @param value value to sort by.
+ */
+void sortOption(Customer *customer, char *sortField) {
+
+    if (compareStrings(sortField, "name", 6)) {
+        showSort(customer, &compareNames);
+        return;
+    }
+
+    if (compareStrings(sortField, "surname", 7)) {
+        showSort(customer, &compareSurnames);
+        return;
+    }
+
+    if (compareStrings(sortField, "city", 5)) {
+        showSort(customer, &compareCities);
+        return;
+    }
+
+    if (compareStrings(sortField, "postalCode", 11)
+        || compareStrings(sortField, "postal", 7)
+        || compareStrings(sortField, "postal_code", 12)) {
+
+        showSort(customer, &comparePostalCodes);
+        return;
+    }
+
+    if (compareStrings(sortField, "phone", 6)) {
+        showSort(customer, &comparePhones);
+        return;
+    }
+
+    if (compareStrings(sortField, "email", 6)) {
+        showSort(customer, &compareEmails);
+        return;
+    }
+
+    if (compareStrings(sortField, "job", 4)) {
+        showSort(customer, &compareJobs);
+        return;
+    }
+
+    printf("The field %s doesn't exist.\n", sortField);
 }
 
 /**
@@ -185,6 +257,47 @@ void showFilter(Customer *customer, char *value, bool (*fieldComparator)(Custome
     } while ((current = current->next) != NULL && current->postalCode != -1);
 
     showList(&copy, "Here is the filtered customers list :\n\n");
+}
+
+/**
+ * Sort customers by given field.
+ * @param customer head of the customers list.
+ * @param fieldComparator function which compare customers fields.
+ */
+void showSort(Customer *customer, int (*fieldComparator)(Customer *, Customer *)) {
+
+    if (customer == NULL || customer->postalCode == -1) {
+        showList(customer, "");
+        return;
+    }
+
+    Customer *copy = (Customer *) malloc(sizeof(Customer));
+    *copy = createCustomer();
+
+    Customer *current = customer;
+    Customer *copyCurrent = copy;
+
+    do {
+
+        copyString(copyCurrent->name, current->name, NAME_SIZE);
+        copyString(copyCurrent->surname, current->surname, SURNAME_SIZE);
+        copyString(copyCurrent->city, current->city, CITY_SIZE);
+        copyCurrent->postalCode = current->postalCode;
+        copyString(copyCurrent->phone, current->phone, PHONE_SIZE);
+        copyString(copyCurrent->email, current->email, EMAIL_SIZE);
+        copyString(copyCurrent->job, current->job, JOB_SIZE);
+
+        if (current->next != NULL) {
+            copyCurrent->next = (Customer *) malloc(sizeof(Customer));
+            *(copyCurrent->next) = createCustomer();
+            copyCurrent = copyCurrent->next;
+        }
+
+    } while ((current = current->next) != NULL && current->postalCode != -1);
+
+    mergeSort(&copy, fieldComparator);
+
+    showList(copy, "Here is the filtered customers list :\n\n");
 }
 
 /**

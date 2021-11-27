@@ -6,9 +6,15 @@
 
 void show(Customer *customer, Command command);
 
+void filterOption(Customer *customer, char *filterField, char *value);
+
+void sortOption(Customer *customer, char *sortField);
+
 void showList(Customer *customer, char *word);
 
 void showFilter(Customer *customer, char *value, bool (*fieldComparator)(Customer *, char *));
+
+void showSort(Customer *customer, int (*fieldComparator)(Customer *, Customer *));
 
 void showIncomplete(Customer *customer);
 
