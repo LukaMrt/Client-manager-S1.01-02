@@ -11,6 +11,7 @@
 #include "help/help.h"
 #include "edit/edit.h"
 #include "sort/sort.h"
+#include "../utils/utils.h"
 
 /**
  * Executes the options given by the user.
@@ -21,68 +22,66 @@ void executeCommand(const char *entry, Customer *customer) {
 
     Command command = parseCommand(entry);
 
-    int result = 0;
-
-    for (int i = 0; command.name[i] != '\0'; ++i) {
-        result += (int) command.name[i];
+    if (compareStrings(command.name, "add", 4)) {
+        add(customer, command);
+        return;
     }
 
-//    printf("Commande %s => %d\n", command.name, result);
-
-    switch (result) {
-
-        case 297:
-            add(customer, command);
-            break;
-
-        case 630:
-            search(customer, command);
-            break;
-
-        case 646:
-            filter(customer, command);
-            break;
-
-        case 627:
-            delete(customer, command);
-            break;
-
-        case 456:
-            sort(customer, command);
-            break;
-
-        case 422:
-            edit(customer, command);
-            break;
-
-        case 431:
-            save(customer, command);
-            break;
-
-        case 416:
-            load(customer, command);
-            break;
-
-        case 758: // display
-        case 449: // show
-            show(customer, command);
-            break;
-
-        case 425:
-            help(customer, command);
-            break;
-
-        case 442: // exit
-        case 451: // quit
-        case 454: // stop
-        case 311: // end
-        case 113: // q
-            break;
-
-        default:
-            printf("La commande %s n'existe pas.\n", command.name);
-            break;
+    if (compareStrings(command.name, "show", 5)
+        || compareStrings(command.name, "display", 8)) {
+        show(customer, command);
+        return;
     }
+
+    if (compareStrings(command.name, "load", 5)) {
+        load(customer, command);
+        return;
+    }
+
+    if (compareStrings(command.name, "delete", 7)) {
+        delete(customer, command);
+        return;
+    }
+
+    if (compareStrings(command.name, "filter", 7)) {
+        filter(customer, command);
+        return;
+    }
+
+    if (compareStrings(command.name, "search", 7)) {
+        search(customer, command);
+        return;
+    }
+
+    if (compareStrings(command.name, "save", 5)) {
+        save(customer, command);
+        return;
+    }
+
+    if (compareStrings(command.name, "help", 5)) {
+        help(customer, command);
+        return;
+    }
+
+    if (compareStrings(command.name, "edit", 5)) {
+        edit(customer, command);
+        return;
+    }
+
+    if (compareStrings(command.name, "sort", 5)) {
+        sort(customer, command);
+        return;
+    }
+
+    if (compareStrings(command.name, "exit", 5)
+        || compareStrings(command.name, "quit", 5)
+        || compareStrings(command.name, "q", 2)
+        || compareStrings(command.name, "stop", 5)
+        || compareStrings(command.name, "end", 4)) {
+        return;
+    }
+
+    printf("Invalid command. Type 'help' for a list of commands.\n");
 }
 
 /**
