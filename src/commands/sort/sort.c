@@ -12,6 +12,7 @@ void sort(Customer *customer, Command command) {
     Customer* head = customer;
 
     char sortField[15] = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
+    bool revert = false;
 
     for (int i = 0; i < command.optionsCount; ++i) {
         Option option = command.options[i];
@@ -19,6 +20,11 @@ void sort(Customer *customer, Command command) {
         if (compareStrings(removeNullCharacters(option.name), "-field") ||
             compareStrings(removeNullCharacters(option.name), "-f")) {
             copyString(sortField, option.value, 15);
+        }
+
+        if (compareStrings(removeNullCharacters(option.name), "-revert") ||
+            compareStrings(removeNullCharacters(option.name), "-r")) {
+            revert = true;
         }
 
     }
@@ -33,34 +39,34 @@ void sort(Customer *customer, Command command) {
     removeNullCharacters(sortField);
 
     if (compareStrings(sortField, "name")) {
-        mergeSort(&head, &compareNames);
+        mergeSort(&head, &compareNames, revert);
     }
 
     if (compareStrings(sortField, "surname")) {
-        mergeSort(&head, &compareSurnames);
+        mergeSort(&head, &compareSurnames, revert);
     }
 
     if (compareStrings(sortField, "city")) {
-        mergeSort(&head, &compareCities);
+        mergeSort(&head, &compareCities, revert);
     }
 
     if (compareStrings(sortField, "postalCode")
         || compareStrings(sortField, "postal")
         || compareStrings(sortField, "postal_code")) {
 
-        mergeSort(&head, &comparePostalCodes);
+        mergeSort(&head, &comparePostalCodes, revert);
     }
 
     if (compareStrings(sortField, "phone")) {
-        mergeSort(&head, &comparePhones);
+        mergeSort(&head, &comparePhones, revert);
     }
 
     if (compareStrings(sortField, "email")) {
-        mergeSort(&head, &compareEmails);
+        mergeSort(&head, &compareEmails, revert);
     }
 
     if (compareStrings(sortField, "job")) {
-        mergeSort(&head, &compareJobs);
+        mergeSort(&head, &compareJobs, revert);
     }
 
     Customer* temp = head;
@@ -89,7 +95,7 @@ void sort(Customer *customer, Command command) {
     printf("Customers list sorted successfully by %s.\n", sortField);
 }
 
-void mergeSort(Customer **customer, int (*fieldComparator)(Customer *, Customer *)) {
+void mergeSort(Customer **customer, int (*fieldComparator)(Customer *, Customer *), bool revert) {
 
     Customer *head = *customer;
     Customer *start;
@@ -101,10 +107,10 @@ void mergeSort(Customer **customer, int (*fieldComparator)(Customer *, Customer 
 
     split(head, &start, &end);
 
-    mergeSort(&start, fieldComparator);
-    mergeSort(&end, fieldComparator);
+    mergeSort(&start, fieldComparator, revert);
+    mergeSort(&end, fieldComparator, revert);
 
-    *customer = merge(start, end, fieldComparator);
+    *customer = merge(start, end, fieldComparator, revert);
 }
 
 void split(Customer *source, Customer **start, Customer **end) {
@@ -130,7 +136,7 @@ void split(Customer *source, Customer **start, Customer **end) {
     slow->next = NULL;
 }
 
-Customer *merge(Customer *start, Customer *end, int (*fieldComparator)(Customer *, Customer *)) {
+Customer *merge(Customer *start, Customer *end, int (*fieldComparator)(Customer *, Customer *), bool revert) {
 
     if (start == NULL) {
         return end;
@@ -140,11 +146,11 @@ Customer *merge(Customer *start, Customer *end, int (*fieldComparator)(Customer 
         return start;
     }
 
-    if (fieldComparator(start, end) <= 0) {
-        start->next = merge(start->next, end, fieldComparator);
+    if ((revert ? fieldComparator(end, start) : fieldComparator(start, end)) <= 0) {
+        start->next = merge(start->next, end, fieldComparator, revert);
         return start;
     }
 
-    end->next = merge(start, end->next, fieldComparator);
+    end->next = merge(start, end->next, fieldComparator, revert);
     return end;
 }

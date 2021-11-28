@@ -18,6 +18,7 @@ void show(Customer *customer, Command command) {
     char *filterField = "";
     char *sortField = "";
     char *value = "";
+    bool revert = false;
 
     for (int i = 0; i < command.optionsCount; ++i) {
         Option option = command.options[i];
@@ -35,6 +36,11 @@ void show(Customer *customer, Command command) {
         if (compareStrings(removeNullCharacters(option.name), "-value") ||
             compareStrings(removeNullCharacters(option.name), "-v")) {
             value = removeNullCharacters(option.value);
+        }
+
+        if (compareStrings(removeNullCharacters(option.name), "-revert") ||
+            compareStrings(removeNullCharacters(option.name), "-r")) {
+            revert = true;
         }
 
         if (compareStrings(removeNullCharacters(option.name), "-incomplete") ||
@@ -57,7 +63,7 @@ void show(Customer *customer, Command command) {
     }
 
     if (strlen(sortField) != 0) {
-        sortOption(customer, sortField);
+        sortOption(customer, sortField, revert);
         return;
     }
 
@@ -129,20 +135,20 @@ void filterOption(Customer *customer, char *filterField, char *value) {
  * @param sortField field to sort by.
  * @param value value to sort by.
  */
-void sortOption(Customer *customer, char *sortField) {
+void sortOption(Customer *customer, char *sortField, bool revert) {
 
     if (compareStrings(sortField, "name")) {
-        showSort(customer, &compareNames);
+        showSort(customer, &compareNames, revert);
         return;
     }
 
     if (compareStrings(sortField, "surname")) {
-        showSort(customer, &compareSurnames);
+        showSort(customer, &compareSurnames, revert);
         return;
     }
 
     if (compareStrings(sortField, "city")) {
-        showSort(customer, &compareCities);
+        showSort(customer, &compareCities, revert);
         return;
     }
 
@@ -150,22 +156,22 @@ void sortOption(Customer *customer, char *sortField) {
         || compareStrings(sortField, "postal")
         || compareStrings(sortField, "postal_code")) {
 
-        showSort(customer, &comparePostalCodes);
+        showSort(customer, &comparePostalCodes, revert);
         return;
     }
 
     if (compareStrings(sortField, "phone")) {
-        showSort(customer, &comparePhones);
+        showSort(customer, &comparePhones, revert);
         return;
     }
 
     if (compareStrings(sortField, "email")) {
-        showSort(customer, &compareEmails);
+        showSort(customer, &compareEmails, revert);
         return;
     }
 
     if (compareStrings(sortField, "job")) {
-        showSort(customer, &compareJobs);
+        showSort(customer, &compareJobs, revert);
         return;
     }
 
@@ -264,7 +270,7 @@ void showFilter(Customer *customer, char *value, bool (*fieldComparator)(Custome
  * @param customer head of the customers list.
  * @param fieldComparator function which compare customers fields.
  */
-void showSort(Customer *customer, int (*fieldComparator)(Customer *, Customer *)) {
+void showSort(Customer *customer, int (*fieldComparator)(Customer *, Customer *), bool revert) {
 
     if (customer == NULL || customer->postalCode == -1) {
         showList(customer, "");
@@ -295,7 +301,7 @@ void showSort(Customer *customer, int (*fieldComparator)(Customer *, Customer *)
 
     } while ((current = current->next) != NULL && current->postalCode != -1);
 
-    mergeSort(&copy, fieldComparator);
+    mergeSort(&copy, fieldComparator, revert);
 
     showList(copy, "Here is the filtered customers list :\n\n");
 }
