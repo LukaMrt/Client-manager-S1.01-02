@@ -4,7 +4,7 @@ project(Client_manager_S1_01_02 C)
 set(CMAKE_C_STANDARD 99)
 
 add_executable(
-        Client_manager
+        Customers_Manager
         main.c
         src/commands/commands.h
         src/commands/commands.c
