@@ -20,6 +20,8 @@ void delete(Customer *customer, Command command) {
     Customer *before = customer;
     Customer *after;
 
+    // TODO : select by id or by all fields
+
     while (!compareStrings(current->name, name, 20) && current->next != NULL && current->postalCode != -1) {
         if (before != current) {
             before = before->next;

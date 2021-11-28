@@ -17,9 +17,9 @@ void save(Customer *customer, Command command) {
     for (int i = 0; i < command.optionsCount; ++i) {
         Option option = command.options[i];
 
-        if (compareStrings(cleanString(option.name), "-file", 50) ||
-            compareStrings(cleanString(option.name), "-f", 50)) {
-            fileName = cleanString(option.value);
+        if (compareStrings(removeNullCharacters(option.name), "-file", 50) ||
+            compareStrings(removeNullCharacters(option.name), "-f", 50)) {
+            fileName = removeNullCharacters(option.value);
         }
 
     }
@@ -39,13 +39,13 @@ void save(Customer *customer, Command command) {
     while (current != NULL && current->postalCode != -1) {
 
         fprintf(file, "%s,%s,%s,%d,%s,%s,%s\n",
-                cleanString(current->name),
-                cleanString(current->surname),
-                cleanString(current->city),
+                removeNullCharacters(current->name),
+                removeNullCharacters(current->surname),
+                removeNullCharacters(current->city),
                 current->postalCode,
-                cleanString(current->phone),
-                cleanString(current->email),
-                cleanString(current->job));
+                removeNullCharacters(current->phone),
+                removeNullCharacters(current->email),
+                removeNullCharacters(current->job));
 
         current = current->next;
     }

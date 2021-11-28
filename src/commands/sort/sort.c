@@ -16,8 +16,8 @@ void sort(Customer *customer, Command command) {
     for (int i = 0; i < command.optionsCount; ++i) {
         Option option = command.options[i];
 
-        if (compareStrings(cleanString(option.name), "-field", 6) ||
-            compareStrings(cleanString(option.name), "-f", 3)) {
+        if (compareStrings(removeNullCharacters(option.name), "-field", 6) ||
+            compareStrings(removeNullCharacters(option.name), "-f", 3)) {
             copyString(sortField, option.value, 15);
         }
 
@@ -29,8 +29,8 @@ void sort(Customer *customer, Command command) {
         fseek(stdin, 0, SEEK_END);
     }
 
-    formatString(sortField, 15);
-    cleanString(sortField);
+    removeNewLineCharacters(sortField, 15);
+    removeNullCharacters(sortField);
 
     if (compareStrings(sortField, "name", 6)) {
         mergeSort(&head, &compareNames);

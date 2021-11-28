@@ -6,9 +6,11 @@
 
 char *scanString();
 
-char *cleanString(const char *entry);
+char *removeNullCharacters(const char *entry);
 
-void formatString(char *entry, int size);
+void removeNewLineCharacters(char *entry, int size);
+
+void createEmptyString(char *entry, int size);
 
 bool compareStrings(const char *name, const char *name1, int size);
 

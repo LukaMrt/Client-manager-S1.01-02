@@ -22,29 +22,29 @@ void show(Customer *customer, Command command) {
     for (int i = 0; i < command.optionsCount; ++i) {
         Option option = command.options[i];
 
-        if (compareStrings(cleanString(option.name), "-filter", 8) ||
-            compareStrings(cleanString(option.name), "-f", 3)) {
-            filterField = cleanString(option.value);
+        if (compareStrings(removeNullCharacters(option.name), "-filter", 8) ||
+            compareStrings(removeNullCharacters(option.name), "-f", 3)) {
+            filterField = removeNullCharacters(option.value);
         }
 
-        if (compareStrings(cleanString(option.name), "-sort", 6) ||
-            compareStrings(cleanString(option.name), "-s", 3)) {
-            sortField = cleanString(option.value);
+        if (compareStrings(removeNullCharacters(option.name), "-sort", 6) ||
+            compareStrings(removeNullCharacters(option.name), "-s", 3)) {
+            sortField = removeNullCharacters(option.value);
         }
 
-        if (compareStrings(cleanString(option.name), "-value", 7) ||
-            compareStrings(cleanString(option.name), "-v", 3)) {
-            value = cleanString(option.value);
+        if (compareStrings(removeNullCharacters(option.name), "-value", 7) ||
+            compareStrings(removeNullCharacters(option.name), "-v", 3)) {
+            value = removeNullCharacters(option.value);
         }
 
-        if (compareStrings(cleanString(option.name), "-incomplete", 12) ||
-            compareStrings(cleanString(option.name), "-i", 3)) {
+        if (compareStrings(removeNullCharacters(option.name), "-incomplete", 12) ||
+            compareStrings(removeNullCharacters(option.name), "-i", 3)) {
             showIncomplete(customer);
             return;
         }
 
-        if (compareStrings(cleanString(option.name), "-complete", 10) ||
-            compareStrings(cleanString(option.name), "-c", 3)) {
+        if (compareStrings(removeNullCharacters(option.name), "-complete", 10) ||
+            compareStrings(removeNullCharacters(option.name), "-c", 3)) {
             showComplete(customer);
             return;
         }

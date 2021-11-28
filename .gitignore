@@ -98,7 +98,7 @@ cmake-build-*/
 # Mongo Explorer plugin
 .idea/**/mongoSettings.xml
 
-# File-based project formatString
+# File-based project removeNewLineCharacters
 *.iws
 
 # IntelliJ

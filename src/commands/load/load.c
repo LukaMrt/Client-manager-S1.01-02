@@ -20,9 +20,9 @@ void load(Customer *customer, Command command) {
     for (int i = 0; i < command.optionsCount; ++i) {
         Option option = command.options[i];
 
-        if (compareStrings(cleanString(option.name), "-file", 50) ||
-            compareStrings(cleanString(option.name), "-f", 50)) {
-            fileName = cleanString(option.value);
+        if (compareStrings(removeNullCharacters(option.name), "-file", 50) ||
+            compareStrings(removeNullCharacters(option.name), "-f", 50)) {
+            fileName = removeNullCharacters(option.value);
         }
 
     }
@@ -46,14 +46,20 @@ void load(Customer *customer, Command command) {
 
         char c;
 
-        char name[NAME_SIZE] = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
-        char surname[SURNAME_SIZE] = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
-        char city[CITY_SIZE] = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
+        char name[NAME_SIZE];
+        char surname[SURNAME_SIZE];
+        char city[CITY_SIZE];
+        char phone[PHONE_SIZE];
+        char email[EMAIL_SIZE];
+        char job[JOB_SIZE];
         int postalCode = 0;
-        char phone[PHONE_SIZE] = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
-        char email[EMAIL_SIZE] = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
-        char job[JOB_SIZE] = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
 
+        createEmptyString(name, NAME_SIZE);
+        createEmptyString(surname, SURNAME_SIZE);
+        createEmptyString(city, CITY_SIZE);
+        createEmptyString(phone, PHONE_SIZE);
+        createEmptyString(email, EMAIL_SIZE);
+        createEmptyString(job, JOB_SIZE);
         int i = 0;
         while (shouldContinue(file, &c)) {
             if (i < 24) {

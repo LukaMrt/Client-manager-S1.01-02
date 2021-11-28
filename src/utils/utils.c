@@ -39,7 +39,7 @@ char *scanString() {
  * @param entry string to be cleaned.
  * @return cleaned string.
  */
-char *cleanString(const char *entry) {
+char *removeNullCharacters(const char *entry) {
     size_t size = 10;
     size_t index = 0;
     char *output;
@@ -68,10 +68,10 @@ char *cleanString(const char *entry) {
 
 /**
  * Formats entry to remove new lines characters.
- * @param entry Entry to formatString.
+ * @param entry Entry to removeNewLineCharacters.
  * @param size Size of entry.
  */
-void formatString(char *entry, int size) {
+void removeNewLineCharacters(char *entry, int size) {
 
     for (int i = 0; i < size; ++i) {
         if (entry[i] == '\0') {
@@ -82,6 +82,17 @@ void formatString(char *entry, int size) {
         }
     }
 
+}
+
+/**
+ * Create a string filled with null characters.
+ * @param entry string to be filled.
+ * @param size size of string.
+ */
+void createEmptyString(char *entry, int size) {
+    for (int i = 0; i < size; ++i) {
+        entry[i] = '\0';
+    }
 }
 
 /**
