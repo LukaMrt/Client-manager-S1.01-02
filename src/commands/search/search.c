@@ -23,7 +23,7 @@ void search(Customer *customer, Command command) {
     scanf("%s", category);
     getchar();
 
-    if (compareStrings(category, "name", 4)) {
+    if (compareStrings(category, "name")) {
         printf("Enter the name :");
         scanf("%s", namec);
         getchar();
@@ -41,7 +41,7 @@ void search(Customer *customer, Command command) {
 
         int i = 1;
         while (current != NULL) {
-            if (compareStrings(current->name, namec, 25)) {
+            if (compareStrings(current->name, namec)) {
                 a = false;
                 if (current->postalCode != 0) {
                     sprintf(postalCode, "%d", current->postalCode);
@@ -64,7 +64,7 @@ void search(Customer *customer, Command command) {
         }
     }
 
-    if (compareStrings(category, "surname", 8)) {
+    if (compareStrings(category, "surname")) {
         printf("Enter the surname : ");
         scanf("%s", surnamec);
         getchar();
@@ -82,7 +82,7 @@ void search(Customer *customer, Command command) {
 
         int i = 1;
         while (current != NULL) {
-            if (compareStrings(current->surname, surnamec, 30)) {
+            if (compareStrings(current->surname, surnamec)) {
                 a = false;
                 if (current->postalCode != 0) {
                     sprintf(postalCode, "%d", current->postalCode);
@@ -105,7 +105,7 @@ void search(Customer *customer, Command command) {
         }
     }
 
-    if (compareStrings(category, "city", 5)) {
+    if (compareStrings(category, "city")) {
         printf("Enter the city : ");
         scanf("%s", cityc);
         getchar();
@@ -123,7 +123,7 @@ void search(Customer *customer, Command command) {
 
         int i = 1;
         while (current != NULL) {
-            if (compareStrings(current->city, cityc, 25)) {
+            if (compareStrings(current->city, cityc)) {
                 a = false;
                 if (current->postalCode != 0) {
                     sprintf(postalCode, "%d", current->postalCode);
@@ -146,9 +146,9 @@ void search(Customer *customer, Command command) {
         }
     }
 
-    if (compareStrings(category, "postal_code", 12)
-        || compareStrings(category, "postal", 7)
-        || compareStrings(category, "postalCode", 11)) {
+    if (compareStrings(category, "postal_code")
+        || compareStrings(category, "postal")
+        || compareStrings(category, "postalCode")) {
 
         printf("Enter the postal code : ");
         scanf("%d", &postal);
@@ -194,7 +194,7 @@ void search(Customer *customer, Command command) {
         }
     }
 
-    if (compareStrings(category, "phone", 6)) {
+    if (compareStrings(category, "phone")) {
         printf("Enter the phone : ");
         scanf("%s", phonec);
         getchar();
@@ -212,7 +212,7 @@ void search(Customer *customer, Command command) {
 
         int i = 1;
         while (current != NULL) {
-            if (compareStrings(current->phone, phonec, 15)) {
+            if (compareStrings(current->phone, phonec)) {
                 a = false;
                 if (current->postalCode != 0) {
                     sprintf(postalCode, "%d", current->postalCode);
@@ -235,7 +235,7 @@ void search(Customer *customer, Command command) {
         }
     }
 
-    if (compareStrings(category, "email", 6)) {
+    if (compareStrings(category, "email")) {
         printf("Enter the city : ");
         scanf("%s", mailc);
         getchar();
@@ -253,7 +253,7 @@ void search(Customer *customer, Command command) {
 
         int i = 1;
         while (current != NULL) {
-            if (compareStrings(current->email, mailc, 50)) {
+            if (compareStrings(current->email, mailc)) {
                 a = false;
                 if (current->postalCode != 0) {
                     sprintf(postalCode, "%d", current->postalCode);
@@ -276,7 +276,7 @@ void search(Customer *customer, Command command) {
         }
     }
 
-    if (compareStrings(category, "job", 4)) {
+    if (compareStrings(category, "job")) {
         printf("Enter the job: ");
         scanf("%s", jobc);
         getchar();
@@ -294,7 +294,7 @@ void search(Customer *customer, Command command) {
 
         int i = 1;
         while (current != NULL) {
-            if (compareStrings(current->job, jobc, 35)) {
+            if (compareStrings(current->job, jobc)) {
                 a = false;
                 if (current->postalCode != 0) {
                     sprintf(postalCode, "%d", current->postalCode);

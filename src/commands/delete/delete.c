@@ -22,14 +22,14 @@ void delete(Customer *customer, Command command) {
 
     // TODO : select by id or by all fields
 
-    while (!compareStrings(current->name, name, 20) && current->next != NULL && current->postalCode != -1) {
+    while (!compareStrings(current->name, name) && current->next != NULL && current->postalCode != -1) {
         if (before != current) {
             before = before->next;
         }
         current = current->next;
     }
 
-    if (!compareStrings(current->name, name, 20)) {
+    if (!compareStrings(current->name, name)) {
         printf("Customer not found.\n");
         return;
     }

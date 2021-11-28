@@ -8,11 +8,11 @@ char *scanString();
 
 char *removeNullCharacters(const char *entry);
 
-void removeNewLineCharacters(char *entry, int size);
+void removeNewLineCharacters(char *entry);
 
 void createEmptyString(char *entry, int size);
 
-bool compareStrings(const char *name, const char *name1, int size);
+bool compareStrings(const char *name, const char *name1);
 
 void copyString(char *dest, const char *src, int size);
 

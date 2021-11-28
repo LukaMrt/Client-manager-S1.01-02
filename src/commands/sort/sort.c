@@ -16,8 +16,8 @@ void sort(Customer *customer, Command command) {
     for (int i = 0; i < command.optionsCount; ++i) {
         Option option = command.options[i];
 
-        if (compareStrings(removeNullCharacters(option.name), "-field", 6) ||
-            compareStrings(removeNullCharacters(option.name), "-f", 3)) {
+        if (compareStrings(removeNullCharacters(option.name), "-field") ||
+            compareStrings(removeNullCharacters(option.name), "-f")) {
             copyString(sortField, option.value, 15);
         }
 
@@ -29,37 +29,37 @@ void sort(Customer *customer, Command command) {
         fseek(stdin, 0, SEEK_END);
     }
 
-    removeNewLineCharacters(sortField, 15);
+    removeNewLineCharacters(sortField);
     removeNullCharacters(sortField);
 
-    if (compareStrings(sortField, "name", 6)) {
+    if (compareStrings(sortField, "name")) {
         mergeSort(&head, &compareNames);
     }
 
-    if (compareStrings(sortField, "surname", 7)) {
+    if (compareStrings(sortField, "surname")) {
         mergeSort(&head, &compareSurnames);
     }
 
-    if (compareStrings(sortField, "city", 5)) {
+    if (compareStrings(sortField, "city")) {
         mergeSort(&head, &compareCities);
     }
 
-    if (compareStrings(sortField, "postalCode", 11)
-        || compareStrings(sortField, "postal", 7)
-        || compareStrings(sortField, "postal_code", 12)) {
+    if (compareStrings(sortField, "postalCode")
+        || compareStrings(sortField, "postal")
+        || compareStrings(sortField, "postal_code")) {
 
         mergeSort(&head, &comparePostalCodes);
     }
 
-    if (compareStrings(sortField, "phone", 6)) {
+    if (compareStrings(sortField, "phone")) {
         mergeSort(&head, &comparePhones);
     }
 
-    if (compareStrings(sortField, "email", 6)) {
+    if (compareStrings(sortField, "email")) {
         mergeSort(&head, &compareEmails);
     }
 
-    if (compareStrings(sortField, "job", 4)) {
+    if (compareStrings(sortField, "job")) {
         mergeSort(&head, &compareJobs);
     }
 

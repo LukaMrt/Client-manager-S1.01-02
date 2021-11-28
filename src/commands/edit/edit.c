@@ -26,44 +26,44 @@ void edit(Customer *customer, Command command) {
     for (int i = 0; i < command.optionsCount; ++i) {
         Option option = command.options[i];
 
-        if (compareStrings(removeNullCharacters(option.name), "-id", 4)
-            || compareStrings(removeNullCharacters(option.name), "-i", 3)) {
+        if (compareStrings(removeNullCharacters(option.name), "-id")
+            || compareStrings(removeNullCharacters(option.name), "-i")) {
             id = atoi(option.value);
         }
 
-        if (compareStrings(removeNullCharacters(option.name), "-name", 6)
-            || compareStrings(removeNullCharacters(option.name), "-n", 3)) {
+        if (compareStrings(removeNullCharacters(option.name), "-name")
+            || compareStrings(removeNullCharacters(option.name), "-n")) {
             copyString(name, option.value, NAME_SIZE);
         }
 
-        if (compareStrings(removeNullCharacters(option.name), "-surname", 9)
-            || compareStrings(removeNullCharacters(option.name), "-s", 3)) {
+        if (compareStrings(removeNullCharacters(option.name), "-surname")
+            || compareStrings(removeNullCharacters(option.name), "-s")) {
             copyString(surname, option.value, SURNAME_SIZE);
         }
 
-        if (compareStrings(removeNullCharacters(option.name), "-city", 6)
-            || compareStrings(removeNullCharacters(option.name), "-c", 3)) {
+        if (compareStrings(removeNullCharacters(option.name), "-city")
+            || compareStrings(removeNullCharacters(option.name), "-c")) {
             copyString(city, option.value, CITY_SIZE);
         }
 
-        if (compareStrings(removeNullCharacters(option.name), "-postal", 8)
-            || compareStrings(removeNullCharacters(option.name), "-postalCode", 12)
-            || compareStrings(removeNullCharacters(option.name), "-po", 4)) {
+        if (compareStrings(removeNullCharacters(option.name), "-postal")
+            || compareStrings(removeNullCharacters(option.name), "-postalCode")
+            || compareStrings(removeNullCharacters(option.name), "-po")) {
             postalCode = atoi(option.value);
         }
 
-        if (compareStrings(removeNullCharacters(option.name), "-phone", 7)
-            || compareStrings(removeNullCharacters(option.name), "-ph", 4)) {
+        if (compareStrings(removeNullCharacters(option.name), "-phone")
+            || compareStrings(removeNullCharacters(option.name), "-ph")) {
             copyString(phone, option.value, PHONE_SIZE);
         }
 
-        if (compareStrings(removeNullCharacters(option.name), "-email", 7)
-            || compareStrings(removeNullCharacters(option.name), "-e", 3)) {
+        if (compareStrings(removeNullCharacters(option.name), "-email")
+            || compareStrings(removeNullCharacters(option.name), "-e")) {
             copyString(email, option.value, EMAIL_SIZE);
         }
 
-        if (compareStrings(removeNullCharacters(option.name), "-job", 5)
-            || compareStrings(removeNullCharacters(option.name), "-j", 3)) {
+        if (compareStrings(removeNullCharacters(option.name), "-job")
+            || compareStrings(removeNullCharacters(option.name), "-j")) {
             copyString(job, option.value, JOB_SIZE);
         }
 
@@ -102,7 +102,7 @@ void edit(Customer *customer, Command command) {
     while (strlen(phone) == 0 || !validPhoneNumber(phone)) {
         printf("Enter the phone number of the new customer : ");
         fgets(phone, PHONE_SIZE, stdin);
-        removeNewLineCharacters(phone, 15);
+        removeNewLineCharacters(phone);
         fseek(stdin, 0, SEEK_END);
     }
 
@@ -132,12 +132,12 @@ void edit(Customer *customer, Command command) {
     }
 
     toUpperCase(city);
-    removeNewLineCharacters(name, NAME_SIZE);
-    removeNewLineCharacters(surname, SURNAME_SIZE);
-    removeNewLineCharacters(city, CITY_SIZE);
-    removeNewLineCharacters(phone, PHONE_SIZE);
-    removeNewLineCharacters(email, EMAIL_SIZE);
-    removeNewLineCharacters(job, JOB_SIZE);
+    removeNewLineCharacters(name);
+    removeNewLineCharacters(surname);
+    removeNewLineCharacters(city);
+    removeNewLineCharacters(phone);
+    removeNewLineCharacters(email);
+    removeNewLineCharacters(job);
 
     copyString(current->name, name, NAME_SIZE);
     copyString(current->surname, surname, SURNAME_SIZE);

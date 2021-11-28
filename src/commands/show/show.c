@@ -22,29 +22,29 @@ void show(Customer *customer, Command command) {
     for (int i = 0; i < command.optionsCount; ++i) {
         Option option = command.options[i];
 
-        if (compareStrings(removeNullCharacters(option.name), "-filter", 8) ||
-            compareStrings(removeNullCharacters(option.name), "-f", 3)) {
+        if (compareStrings(removeNullCharacters(option.name), "-filter") ||
+            compareStrings(removeNullCharacters(option.name), "-f")) {
             filterField = removeNullCharacters(option.value);
         }
 
-        if (compareStrings(removeNullCharacters(option.name), "-sort", 6) ||
-            compareStrings(removeNullCharacters(option.name), "-s", 3)) {
+        if (compareStrings(removeNullCharacters(option.name), "-sort") ||
+            compareStrings(removeNullCharacters(option.name), "-s")) {
             sortField = removeNullCharacters(option.value);
         }
 
-        if (compareStrings(removeNullCharacters(option.name), "-value", 7) ||
-            compareStrings(removeNullCharacters(option.name), "-v", 3)) {
+        if (compareStrings(removeNullCharacters(option.name), "-value") ||
+            compareStrings(removeNullCharacters(option.name), "-v")) {
             value = removeNullCharacters(option.value);
         }
 
-        if (compareStrings(removeNullCharacters(option.name), "-incomplete", 12) ||
-            compareStrings(removeNullCharacters(option.name), "-i", 3)) {
+        if (compareStrings(removeNullCharacters(option.name), "-incomplete") ||
+            compareStrings(removeNullCharacters(option.name), "-i")) {
             showIncomplete(customer);
             return;
         }
 
-        if (compareStrings(removeNullCharacters(option.name), "-complete", 10) ||
-            compareStrings(removeNullCharacters(option.name), "-c", 3)) {
+        if (compareStrings(removeNullCharacters(option.name), "-complete") ||
+            compareStrings(removeNullCharacters(option.name), "-c")) {
             showComplete(customer);
             return;
         }
@@ -77,24 +77,24 @@ void filterOption(Customer *customer, char *filterField, char *value) {
         value = scanString();
     }
 
-    if (compareStrings(filterField, "name", 6)) {
+    if (compareStrings(filterField, "name")) {
         showFilter(customer, value, &compareName);
         return;
     }
 
-    if (compareStrings(filterField, "surname", 7)) {
+    if (compareStrings(filterField, "surname")) {
         showFilter(customer, value, &compareSurname);
         return;
     }
 
-    if (compareStrings(filterField, "city", 5)) {
+    if (compareStrings(filterField, "city")) {
         showFilter(customer, value, &compareCity);
         return;
     }
 
-    if (compareStrings(filterField, "postalCode", 11)
-        || compareStrings(filterField, "postal", 7)
-        || compareStrings(filterField, "postal_code", 12)) {
+    if (compareStrings(filterField, "postalCode")
+        || compareStrings(filterField, "postal")
+        || compareStrings(filterField, "postal_code")) {
 
         while (isNotNumber(value)) {
             printf("Enter the value of the field postalCode for the filter : ");
@@ -105,17 +105,17 @@ void filterOption(Customer *customer, char *filterField, char *value) {
         return;
     }
 
-    if (compareStrings(filterField, "phone", 6)) {
+    if (compareStrings(filterField, "phone")) {
         showFilter(customer, value, &comparePhone);
         return;
     }
 
-    if (compareStrings(filterField, "email", 6)) {
+    if (compareStrings(filterField, "email")) {
         showFilter(customer, value, &compareEmail);
         return;
     }
 
-    if (compareStrings(filterField, "job", 4)) {
+    if (compareStrings(filterField, "job")) {
         showFilter(customer, value, &compareJob);
         return;
     }
@@ -131,40 +131,40 @@ void filterOption(Customer *customer, char *filterField, char *value) {
  */
 void sortOption(Customer *customer, char *sortField) {
 
-    if (compareStrings(sortField, "name", 6)) {
+    if (compareStrings(sortField, "name")) {
         showSort(customer, &compareNames);
         return;
     }
 
-    if (compareStrings(sortField, "surname", 7)) {
+    if (compareStrings(sortField, "surname")) {
         showSort(customer, &compareSurnames);
         return;
     }
 
-    if (compareStrings(sortField, "city", 5)) {
+    if (compareStrings(sortField, "city")) {
         showSort(customer, &compareCities);
         return;
     }
 
-    if (compareStrings(sortField, "postalCode", 11)
-        || compareStrings(sortField, "postal", 7)
-        || compareStrings(sortField, "postal_code", 12)) {
+    if (compareStrings(sortField, "postalCode")
+        || compareStrings(sortField, "postal")
+        || compareStrings(sortField, "postal_code")) {
 
         showSort(customer, &comparePostalCodes);
         return;
     }
 
-    if (compareStrings(sortField, "phone", 6)) {
+    if (compareStrings(sortField, "phone")) {
         showSort(customer, &comparePhones);
         return;
     }
 
-    if (compareStrings(sortField, "email", 6)) {
+    if (compareStrings(sortField, "email")) {
         showSort(customer, &compareEmails);
         return;
     }
 
-    if (compareStrings(sortField, "job", 4)) {
+    if (compareStrings(sortField, "job")) {
         showSort(customer, &compareJobs);
         return;
     }

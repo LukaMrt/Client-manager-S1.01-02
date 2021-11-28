@@ -17,8 +17,8 @@ void save(Customer *customer, Command command) {
     for (int i = 0; i < command.optionsCount; ++i) {
         Option option = command.options[i];
 
-        if (compareStrings(removeNullCharacters(option.name), "-file", 50) ||
-            compareStrings(removeNullCharacters(option.name), "-f", 50)) {
+        if (compareStrings(removeNullCharacters(option.name), "-file") ||
+            compareStrings(removeNullCharacters(option.name), "-f")) {
             fileName = removeNullCharacters(option.value);
         }
 

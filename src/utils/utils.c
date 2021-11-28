@@ -68,15 +68,11 @@ char *removeNullCharacters(const char *entry) {
 
 /**
  * Formats entry to remove new lines characters.
- * @param entry Entry to removeNewLineCharacters.
- * @param size Size of entry.
+ * @param entry entry to remove new line characters.
  */
-void removeNewLineCharacters(char *entry, int size) {
+void removeNewLineCharacters(char *entry) {
 
-    for (int i = 0; i < size; ++i) {
-        if (entry[i] == '\0') {
-            return;
-        }
+    for (int i = 0; entry[i] != '\0'; ++i) {
         if (entry[i] == '\n') {
             entry[i] = '\0';
         }
@@ -102,16 +98,18 @@ void createEmptyString(char *entry, int size) {
  * @param size max size of the strings.
  * @return true if strings are equal, false otherwise.
  */
-bool compareStrings(const char *name, const char *name1, int size) {
+bool compareStrings(const char *name, const char *name1) {
 
-    int i;
-    for (i = 0; i < size && name1[i] != '\n' && name1[i] != '\0'; ++i) {
+    int i = 0;
+
+    while (name[i] != '\0' && name1[i] != '\0') {
         if (name[i] != name1[i]) {
             return false;
         }
+        ++i;
     }
 
-    return true;
+    return name[i] == name1[i];
 }
 
 /**

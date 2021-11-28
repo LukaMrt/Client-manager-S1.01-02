@@ -11,7 +11,7 @@
  * @return
  */
 bool compareName(Customer *customer, char *value) {
-    return compareStrings(customer->name, value, NAME_SIZE);
+    return compareStrings(customer->name, value);
 }
 
 /**
@@ -21,7 +21,7 @@ bool compareName(Customer *customer, char *value) {
  * @return
  */
 bool compareSurname(Customer *customer, char *value) {
-    return compareStrings(customer->surname, value, SURNAME_SIZE);
+    return compareStrings(customer->surname, value);
 }
 
 /**
@@ -31,7 +31,7 @@ bool compareSurname(Customer *customer, char *value) {
  * @return
  */
 bool compareCity(Customer *customer, char *value) {
-    return compareStrings(customer->city, value, CITY_SIZE);
+    return compareStrings(customer->city, value);
 }
 
 /**
@@ -51,7 +51,7 @@ bool comparePostalCode(Customer *customer, char *value) {
  * @return
  */
 bool comparePhone(Customer *customer, char *value) {
-    return compareStrings(customer->phone, value, PHONE_SIZE);
+    return compareStrings(customer->phone, value);
 }
 
 /**
@@ -61,7 +61,7 @@ bool comparePhone(Customer *customer, char *value) {
  * @return
  */
 bool compareEmail(Customer *customer, char *value) {
-    return compareStrings(customer->email, value, EMAIL_SIZE);
+    return compareStrings(customer->email, value);
 }
 
 /**
@@ -71,7 +71,7 @@ bool compareEmail(Customer *customer, char *value) {
  * @return
  */
 bool compareJob(Customer *customer, char *value) {
-    return compareStrings(customer->job, value, JOB_SIZE);
+    return compareStrings(customer->job, value);
 }
 
 // TODO: change doc

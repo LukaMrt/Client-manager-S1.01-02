@@ -22,62 +22,62 @@ void executeCommand(const char *entry, Customer *customer) {
 
     Command command = parseCommand(entry);
 
-    if (compareStrings(command.name, "add", 4)) {
+    if (compareStrings(command.name, "add")) {
         add(customer, command);
         return;
     }
 
-    if (compareStrings(command.name, "show", 5)
-        || compareStrings(command.name, "display", 8)) {
+    if (compareStrings(command.name, "show")
+        || compareStrings(command.name, "display")) {
         show(customer, command);
         return;
     }
 
-    if (compareStrings(command.name, "load", 5)) {
+    if (compareStrings(command.name, "load")) {
         load(customer, command);
         return;
     }
 
-    if (compareStrings(command.name, "delete", 7)) {
+    if (compareStrings(command.name, "delete")) {
         delete(customer, command);
         return;
     }
 
-    if (compareStrings(command.name, "filter", 7)) {
+    if (compareStrings(command.name, "filter")) {
         filter(customer, command);
         return;
     }
 
-    if (compareStrings(command.name, "search", 7)) {
+    if (compareStrings(command.name, "search")) {
         search(customer, command);
         return;
     }
 
-    if (compareStrings(command.name, "save", 5)) {
+    if (compareStrings(command.name, "save")) {
         save(customer, command);
         return;
     }
 
-    if (compareStrings(command.name, "help", 5)) {
+    if (compareStrings(command.name, "help")) {
         help(customer, command);
         return;
     }
 
-    if (compareStrings(command.name, "edit", 5)) {
+    if (compareStrings(command.name, "edit")) {
         edit(customer, command);
         return;
     }
 
-    if (compareStrings(command.name, "sort", 5)) {
+    if (compareStrings(command.name, "sort")) {
         sort(customer, command);
         return;
     }
 
-    if (compareStrings(command.name, "exit", 5)
-        || compareStrings(command.name, "quit", 5)
-        || compareStrings(command.name, "q", 2)
-        || compareStrings(command.name, "stop", 5)
-        || compareStrings(command.name, "end", 4)) {
+    if (compareStrings(command.name, "exit")
+        || compareStrings(command.name, "quit")
+        || compareStrings(command.name, "q")
+        || compareStrings(command.name, "stop")
+        || compareStrings(command.name, "end")) {
         return;
     }
 
