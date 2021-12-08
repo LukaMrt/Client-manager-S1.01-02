@@ -84,17 +84,17 @@ void filterOption(Customer *customer, char *filterField, char *value) {
     }
 
     if (compareStrings(filterField, "name")) {
-        showFilter(customer, value, &compareName);
+        showFilter(customer, value, &matchName);
         return;
     }
 
     if (compareStrings(filterField, "surname")) {
-        showFilter(customer, value, &compareSurname);
+        showFilter(customer, value, &matchSurname);
         return;
     }
 
     if (compareStrings(filterField, "city")) {
-        showFilter(customer, value, &compareCity);
+        showFilter(customer, value, &matchCity);
         return;
     }
 
@@ -107,22 +107,22 @@ void filterOption(Customer *customer, char *filterField, char *value) {
             value = scanString();
         }
 
-        showFilter(customer, value, &comparePostalCode);
+        showFilter(customer, value, &matchPostalCode);
         return;
     }
 
     if (compareStrings(filterField, "phone")) {
-        showFilter(customer, value, &comparePhone);
+        showFilter(customer, value, &matchPhone);
         return;
     }
 
     if (compareStrings(filterField, "email")) {
-        showFilter(customer, value, &compareEmail);
+        showFilter(customer, value, &matchEmail);
         return;
     }
 
     if (compareStrings(filterField, "job")) {
-        showFilter(customer, value, &compareJob);
+        showFilter(customer, value, &matchJob);
         return;
     }
 

@@ -5,7 +5,7 @@ set(CMAKE_C_STANDARD 99)
 
 add_executable(
         Customers_Manager
-        main.c
+        src/main.c
         src/commands/commands.h
         src/commands/commands.c
         src/data.h
