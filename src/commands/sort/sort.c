@@ -7,6 +7,11 @@
 #include "../../utils/utils.h"
 #include "../../utils/customersUtils.h"
 
+/**
+ * Sorts the customers by the given field.
+ * @param customer head of the customers list.
+ * @param command command to be executed.
+ */
 void sort(Customer *customer, Command command) {
 
     Customer* head = customer;
@@ -95,6 +100,12 @@ void sort(Customer *customer, Command command) {
     printf("Customers list sorted successfully by %s.\n", sortField);
 }
 
+/**
+ * Sorts the customers by the given comparator.
+ * @param customer head of the customers list.
+ * @param fieldComparator comparator to be used.
+ * @param revert true if the list should be reverted.
+ */
 void mergeSort(Customer **customer, int (*fieldComparator)(Customer *, Customer *), bool revert) {
 
     Customer *head = *customer;
@@ -113,6 +124,12 @@ void mergeSort(Customer **customer, int (*fieldComparator)(Customer *, Customer 
     *customer = merge(start, end, fieldComparator, revert);
 }
 
+/**
+ * Splits the given list into two lists.
+ * @param source head of the list to be split.
+ * @param start head of the first list.
+ * @param end head of the second list.
+ */
 void split(Customer *source, Customer **start, Customer **end) {
 
     Customer *fast;
@@ -136,6 +153,14 @@ void split(Customer *source, Customer **start, Customer **end) {
     slow->next = NULL;
 }
 
+/**
+ * Merges two lists into a sorted one.
+ * @param start head of the first list.
+ * @param end head of the second list.
+ * @param fieldComparator comparator to be used.
+ * @param revert true if the list should be reverted.
+ * @return head of the merged list.
+ */
 Customer *merge(Customer *start, Customer *end, int (*fieldComparator)(Customer *, Customer *), bool revert) {
 
     if (start == NULL) {

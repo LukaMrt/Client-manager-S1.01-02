@@ -1,8 +1,9 @@
 #include <stdio.h>
-#include "../../data.h"
-#include "../commands.h"
 
-void help(Customer *customer, Command command) {
+/**
+ * Displays the help menu.
+ */
+void help() {
 
     printf("Here is the commands list with their options :\n");
 

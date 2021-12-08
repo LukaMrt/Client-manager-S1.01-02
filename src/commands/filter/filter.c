@@ -5,6 +5,11 @@
 #include "../../utils/utils.h"
 #include "../../utils/customersUtils.h"
 
+/**
+ * Filters the customers by the given parameters.
+ * @param customer head list of customers.
+ * @param command command to execute.
+ */
 void filter(Customer *customer, Command command) {
 
     char name[NAME_SIZE];

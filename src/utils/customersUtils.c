@@ -1,4 +1,3 @@
-#include <stdlib.h>
 #include <string.h>
 #include "regex/regex.h"
 #include <stdio.h>
@@ -22,79 +21,7 @@ void createCustomer(Customer *customer) {
 }
 
 /**
- * Compares customer name with value.
- * @param customer customer to compare.
- * @param value value to compare.
- * @return
- */
-bool compareName(Customer *customer, char *value) {
-    return compareStrings(customer->name, value);
-}
-
-/**
- * Compares customer surname with value.
- * @param customer customer to compare.
- * @param value value to compare.
- * @return
- */
-bool compareSurname(Customer *customer, char *value) {
-    return compareStrings(customer->surname, value);
-}
-
-/**
- * Compares customer city with value.
- * @param customer customer to compare.
- * @param value value to compare.
- * @return
- */
-bool compareCity(Customer *customer, char *value) {
-    return compareStrings(customer->city, value);
-}
-
-/**
- * Compares customer postal code with value.
- * @param customer customer to compare.
- * @param value value to compare.
- * @return
- */
-bool comparePostalCode(Customer *customer, char *value) {
-    return customer->postalCode == atoi(value);
-}
-
-/**
- * Compares customer phone with value.
- * @param customer customer to compare.
- * @param value value to compare.
- * @return
- */
-bool comparePhone(Customer *customer, char *value) {
-    return compareStrings(customer->phone, value);
-}
-
-/**
- * Compares customer email with value.
- * @param customer customer to compare.
- * @param value value to compare.
- * @return
- */
-bool compareEmail(Customer *customer, char *value) {
-    return compareStrings(customer->email, value);
-}
-
-/**
- * Compares customer job with value.
- * @param customer customer to compare.
- * @param value value to compare.
- * @return
- */
-bool compareJob(Customer *customer, char *value) {
-    return compareStrings(customer->job, value);
-}
-
-// TODO: change doc
-
-/**
- * Compares customer name with value.
+ * Compares 2 customers by name.
  * @param customer customer to compare.
  * @param value value to compare.
  * @return
@@ -104,7 +31,7 @@ int compareNames(Customer *customer1, Customer *customer2) {
 }
 
 /**
- * Compares customer surname with value.
+ * Compares 2 customers by surname.
  * @param customer customer to compare.
  * @param value value to compare.
  * @return
@@ -114,7 +41,7 @@ int compareSurnames(Customer *customer1, Customer *customer2) {
 }
 
 /**
- * Compares customer city with value.
+ * Compares 2 customers by city.
  * @param customer customer to compare.
  * @param value value to compare.
  * @return
@@ -124,7 +51,7 @@ int compareCities(Customer *customer1, Customer *customer2) {
 }
 
 /**
- * Compares customer postal code with value.
+ * Compares 2 customers by postal code.
  * @param customer customer to compare.
  * @param value value to compare.
  * @return
@@ -134,7 +61,7 @@ int comparePostalCodes(Customer *customer1, Customer *customer2) {
 }
 
 /**
- * Compares customer phone with value.
+ * Compares 2 customers by phone.
  * @param customer customer to compare.
  * @param value value to compare.
  * @return
@@ -144,7 +71,7 @@ int comparePhones(Customer *customer1, Customer *customer2) {
 }
 
 /**
- * Compares customer email with value.
+ * Compares 2 customers by email.
  * @param customer customer to compare.
  * @param value value to compare.
  * @return
@@ -154,7 +81,7 @@ int compareEmails(Customer *customer1, Customer *customer2) {
 }
 
 /**
- * Compares customer job with value.
+ * Compares 2 customers by job.
  * @param customer customer to compare.
  * @param value value to compare.
  * @return
@@ -237,15 +164,15 @@ bool matchJob(Customer *customer, char *regex) {
 
 /**
  * Checks if customer has missing data.
- * @param current customer to check.
+ * @param customer customer to check.
  * @return true if customer has missing data, false otherwise.
  */
-bool hasMissingData(const Customer *current) {
-    return strlen(current->name) == 0
-           || strlen(current->surname) == 0
-           || strlen(current->city) == 0
-           || current->postalCode == 0
-           || strlen(current->phone) == 0
-           || strlen(current->email) == 0
-           || strlen(current->job) == 0;
+bool hasMissingData(const Customer *customer) {
+    return strlen(customer->name) == 0
+           || strlen(customer->surname) == 0
+           || strlen(customer->city) == 0
+           || customer->postalCode == 0
+           || strlen(customer->phone) == 0
+           || strlen(customer->email) == 0
+           || strlen(customer->job) == 0;
 }

@@ -6,6 +6,11 @@
 #include "../../utils/utils.h"
 #include "../../utils/customersUtils.h"
 
+/**
+ * Edits a customer's data.
+ * @param customer customer to edit.
+ * @param command command to execute.
+ */
 void edit(Customer *customer, Command command) {
 
     char name[NAME_SIZE];
@@ -153,7 +158,9 @@ void edit(Customer *customer, Command command) {
             postalCode = -1;
             break;
         }
-        postalCode = atoi(tmp); // TODO : check if postalCode is a number
+        if (!isNotNumber(tmp)) {
+            postalCode = atoi(tmp);
+        }
     }
 
     while (strlen(phone) == 0 || !validPhoneNumber(phone)) {

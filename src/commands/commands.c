@@ -59,7 +59,7 @@ void executeCommand(const char *entry, Customer *customer) {
     }
 
     if (compareStrings(command.name, "help")) {
-        help(customer, command);
+        help();
         return;
     }
 
