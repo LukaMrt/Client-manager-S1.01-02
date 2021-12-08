@@ -6,4 +6,6 @@
 
 void filter(Customer *customer, Command command);
 
+void filterList(Customer *customer, int (*fieldComparator)(Customer *, char *));
+
 #endif //CLIENT_MANAGER_S1_01_02_FILTER_H

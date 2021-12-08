@@ -1,8 +1,25 @@
 #include <stdlib.h>
 #include <string.h>
+#include "regex/regex.h"
+#include <stdio.h>
 #include "../data.h"
 #include "customersUtils.h"
 #include "utils.h"
+
+/**
+ * Creates a new Customer with empty fields.
+ * @return default Customer.
+ */
+void createCustomer(Customer *customer) {
+
+    createEmptyString(customer->name, NAME_SIZE);
+    createEmptyString(customer->surname, SURNAME_SIZE);
+    createEmptyString(customer->city, CITY_SIZE);
+    customer->postalCode = -1;
+    createEmptyString(customer->phone, PHONE_SIZE);
+    createEmptyString(customer->email, EMAIL_SIZE);
+    createEmptyString(customer->job, JOB_SIZE);
+}
 
 /**
  * Compares customer name with value.
@@ -147,7 +164,79 @@ int compareJobs(Customer *customer1, Customer *customer2) {
 }
 
 /**
- * Check if customer has missing data.
+ * Checks if customer name match with regex.
+ * @param customer customer to check.
+ * @return true if match, false otherwise.
+ */
+bool matchName(Customer *customer, char *regex) {
+    int length = NAME_SIZE;
+    return re_match(regex, customer->name, &length) != -1;
+}
+
+/**
+ * Checks if customer surname match with regex.
+ * @param customer customer to compare.
+ * @return true if match, false otherwise.
+ */
+bool matchSurname(Customer *customer, char *regex) {
+    int length = SURNAME_SIZE;
+    return re_match(regex, customer->surname, &length) != -1;
+}
+
+/**
+ *   Checks if customer city match with regex.
+ * @param customer customer to compare.
+ * @return true if match, false otherwise.
+ */
+bool matchCity(Customer *customer, char *regex) {
+    int length = CITY_SIZE;
+    return re_match(regex, customer->city, &length) != -1;
+}
+
+/**
+ * Checks if customer postal code match with regex.
+ * @param customer customer to compare.
+ * @return true if match, false otherwise.
+ */
+bool matchPostalCode(Customer *customer, char *regex) {
+    char stringPostalCode[6];
+    sprintf(stringPostalCode, "%d", customer->postalCode);
+    int length = 6;
+    return re_match(regex, stringPostalCode, &length) != -1;
+}
+
+/**
+ * Checks if customer phone match with regex.
+ * @param customer customer to compare.
+ * @return true if match, false otherwise.
+ */
+bool matchPhone(Customer *customer, char *regex) {
+    int length = PHONE_SIZE;
+    return re_match(regex, customer->phone, &length) != -1;
+}
+
+/**
+ * Checks if customer email match with regex.
+ * @param customer customer to compare.
+ * @return true if match, false otherwise.
+ */
+bool matchEmail(Customer *customer, char *regex) {
+    int length = EMAIL_SIZE;
+    return re_match(regex, customer->email, &length) != -1;
+}
+
+/**
+ * Checks if customer job match with regex.
+ * @param customer customer to compare.
+ * @return true if match, false otherwise.
+ */
+bool matchJob(Customer *customer, char *regex) {
+    int length = JOB_SIZE;
+    return re_match(regex, customer->phone, &length) != -1;
+}
+
+/**
+ * Checks if customer has missing data.
  * @param current customer to check.
  * @return true if customer has missing data, false otherwise.
  */

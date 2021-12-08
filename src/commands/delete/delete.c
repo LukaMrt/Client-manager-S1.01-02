@@ -4,6 +4,7 @@
 #include "../commands.h"
 #include "delete.h"
 #include "../../utils/utils.h"
+#include "../../utils/customersUtils.h"
 
 /**
  * Deletes a customer from the list.
@@ -37,10 +38,9 @@ void delete(Customer *customer, Command command) {
     after = current->next;
     before->next = after;
 
-    Customer newCustomer = createCustomer();
 
     if (after == NULL) {
-        after = &newCustomer;
+        createCustomer(after);
     }
 
     if (before == current) {

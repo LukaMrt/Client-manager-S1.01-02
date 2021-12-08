@@ -1,6 +1,8 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "src/commands/commands.h"
 #include "src/utils/utils.h"
+#include "src/utils/customersUtils.h"
 
 /**
  * Entry point of application
@@ -12,13 +14,14 @@ int main() {
     printf("  ~~~ Customers manager ~~~ \n");
 
     char *entry;
-    Customer customer = createCustomer();
+    Customer *customer = (Customer *) malloc(sizeof(Customer));
+    createCustomer(customer);
 
     do {
 
         printf("\n => Enter a command : ");
         entry = scanString();
-        executeCommand(entry, &customer);
+        executeCommand(entry, customer);
 
     } while (!compareStrings(entry, "exit")
              && !compareStrings(entry, "quit")

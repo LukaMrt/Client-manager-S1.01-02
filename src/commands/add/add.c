@@ -6,6 +6,7 @@
 #include "../commands.h"
 #include "add.h"
 #include "../../utils/utils.h"
+#include "../../utils/customersUtils.h"
 
 /**
  * Adds new Customer to list.
@@ -113,8 +114,6 @@ void add(Customer *customer, Command command) {
         fseek(stdin, 0, SEEK_END);
     }
 
-    Customer newCustomer = createCustomer();
-
     toUpperCase(city);
     removeNewLineCharacters(name);
     removeNewLineCharacters(surname);
@@ -131,7 +130,7 @@ void add(Customer *customer, Command command) {
 
     if (customer->postalCode != -1) {
         current->next = (Customer *) malloc(sizeof(Customer));
-        *(current->next) = newCustomer;
+        createCustomer(current->next);
         current = current->next;
     }
 

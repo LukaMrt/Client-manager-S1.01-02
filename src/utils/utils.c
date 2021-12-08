@@ -150,24 +150,6 @@ void toUpperCase(char *entry) {
 }
 
 /**
- * Creates a new Customer with empty fields.
- * @return default Customer.
- */
-Customer createCustomer() {
-    Customer defaultCustomer = {
-            "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
-            "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
-            "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
-            -1,
-            "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
-            "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
-            "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
-            NULL
-    };
-    return defaultCustomer;
-}
-
-/**
  * Check if a string is not a number.
  * @param value string to be checked.
  * @return true if string is not a number, false otherwise.

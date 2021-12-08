@@ -239,8 +239,9 @@ void showFilter(Customer *customer, char *value, bool (*fieldComparator)(Custome
     }
 
     Customer *current = customer;
-    Customer copy = createCustomer();
-    Customer *copyCurrent = &copy;
+    Customer *copyCurrent = (Customer *) malloc(sizeof(Customer));
+    createCustomer(copyCurrent);
+    Customer *copy = copyCurrent;
 
     do {
 
@@ -248,9 +249,8 @@ void showFilter(Customer *customer, char *value, bool (*fieldComparator)(Custome
             continue;
         }
 
-        Customer newCustomer = createCustomer();
         copyCurrent->next = (Customer *) malloc(sizeof(Customer));
-        *(copyCurrent->next) = newCustomer;
+        createCustomer(copyCurrent->next);
         strcpy(copyCurrent->name, current->name);
         strcpy(copyCurrent->surname, current->surname);
         strcpy(copyCurrent->city, current->city);
@@ -262,7 +262,7 @@ void showFilter(Customer *customer, char *value, bool (*fieldComparator)(Custome
 
     } while ((current = current->next) != NULL && current->postalCode != -1);
 
-    showList(&copy, "Here is the filtered customers list :\n\n");
+    showList(copy, "Here is the filtered customers list :\n\n");
 }
 
 /**
@@ -277,11 +277,10 @@ void showSort(Customer *customer, int (*fieldComparator)(Customer *, Customer *)
         return;
     }
 
-    Customer *copy = (Customer *) malloc(sizeof(Customer));
-    *copy = createCustomer();
-
     Customer *current = customer;
-    Customer *copyCurrent = copy;
+    Customer *copyCurrent = (Customer *) malloc(sizeof(Customer));
+    createCustomer(copyCurrent);
+    Customer *copy = copyCurrent;
 
     do {
 
@@ -295,7 +294,7 @@ void showSort(Customer *customer, int (*fieldComparator)(Customer *, Customer *)
 
         if (current->next != NULL) {
             copyCurrent->next = (Customer *) malloc(sizeof(Customer));
-            *(copyCurrent->next) = createCustomer();
+            createCustomer(copyCurrent->next);
             copyCurrent = copyCurrent->next;
         }
 
@@ -321,8 +320,9 @@ void showIncomplete(Customer *customer) {
     }
 
     Customer *current = customer;
-    Customer copy = createCustomer();
-    Customer *copyCurrent = &copy;
+    Customer *copyCurrent = (Customer *) malloc(sizeof(Customer));
+    createCustomer(copyCurrent);
+    Customer *copy = copyCurrent;
 
     do {
 
@@ -334,9 +334,8 @@ void showIncomplete(Customer *customer) {
 
         ++a;
 
-        Customer newCustomer = createCustomer();
         copyCurrent->next = (Customer *) malloc(sizeof(Customer));
-        *(copyCurrent->next) = newCustomer;
+        createCustomer(copyCurrent->next);
         strcpy(copyCurrent->name, current->name);
         strcpy(copyCurrent->surname, current->surname);
         strcpy(copyCurrent->city, current->city);
@@ -349,7 +348,7 @@ void showIncomplete(Customer *customer) {
     } while ((current = current->next) != NULL && current->postalCode != -1);
 
     printf("%d customers have missing data (%.2f%%).\n", a, roundf((float)(a) * 10000 / (float)(b)) / 100);
-    showList(&copy, "Here is the list of customers with missing values :\n\n");
+    showList(copy, "Here is the list of customers with missing values :\n\n");
 }
 
 /**
@@ -367,8 +366,9 @@ void showComplete(Customer *customer) {
     }
 
     Customer *current = customer;
-    Customer copy = createCustomer();
-    Customer *copyCurrent = &copy;
+    Customer *copyCurrent = (Customer *) malloc(sizeof(Customer));
+    createCustomer(copyCurrent);
+    Customer *copy = copyCurrent;
 
     do {
 
@@ -380,9 +380,8 @@ void showComplete(Customer *customer) {
 
         ++a;
 
-        Customer newCustomer = createCustomer();
         copyCurrent->next = (Customer *) malloc(sizeof(Customer));
-        *(copyCurrent->next) = newCustomer;
+        createCustomer(copyCurrent->next);
         strcpy(copyCurrent->name, current->name);
         strcpy(copyCurrent->surname, current->surname);
         strcpy(copyCurrent->city, current->city);
@@ -395,5 +394,5 @@ void showComplete(Customer *customer) {
     } while ((current = current->next) != NULL && current->postalCode != -1);
 
     printf("%d customers have no missing data (%.2f%%).\n", a, roundf((float)(a) * 10000 / (float)(b)) / 100);
-    showList(&copy, "Here is the list of customers without missing values :\n\n");
+    showList(copy, "Here is the list of customers without missing values :\n\n");
 }

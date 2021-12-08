@@ -33,4 +33,6 @@ add_executable(
         src/commands/help/help.h
         src/commands/help/help.c
         src/commands/edit/edit.c
+        src/utils/regex/regex.h
+        src/utils/regex/regex.c
 )

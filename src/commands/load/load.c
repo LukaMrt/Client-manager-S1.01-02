@@ -5,6 +5,7 @@
 #include "../commands.h"
 #include "../../utils/utils.h"
 #include "load.h"
+#include "../../utils/customersUtils.h"
 
 bool shouldContinue(FILE *file, char *c);
 
@@ -38,7 +39,7 @@ void load(Customer *customer, Command command) {
         return;
     }
 
-    *customer = createCustomer();
+    createCustomer(customer);
 
     Customer *last = customer;
 
@@ -117,11 +118,8 @@ void load(Customer *customer, Command command) {
             continue;
         }
 
-        Customer newCustomer = createCustomer();
 
         if (last->postalCode == -1) {
-            *last = newCustomer;
-
             strcpy(last->name, name);
             strcpy(last->surname, surname);
             strcpy(last->city, city);
@@ -134,7 +132,7 @@ void load(Customer *customer, Command command) {
         }
 
         last->next = (Customer *) malloc(sizeof(Customer));
-        *(last->next) = newCustomer;
+        createCustomer(last->next);
 
         strcpy(last->next->name, name);
         strcpy(last->next->surname, surname);

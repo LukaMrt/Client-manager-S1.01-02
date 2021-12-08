@@ -18,8 +18,6 @@ void copyString(char *dest, const char *src, int size);
 
 void toUpperCase(char *entry);
 
-Customer createCustomer();
-
 bool isNotNumber(char *entry);
 
 bool validPhoneNumber(char phone[15]);

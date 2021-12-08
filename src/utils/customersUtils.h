@@ -3,6 +3,8 @@
 
 #include <stdbool.h>
 
+void createCustomer(Customer *customer);
+
 bool compareName(Customer *customer, char *value);
 
 bool compareSurname(Customer *customer, char *value);
@@ -30,6 +32,20 @@ int comparePhones(Customer *customer1, Customer *customer2);
 int compareEmails(Customer *customer1, Customer *customer2);
 
 int compareJobs(Customer *customer1, Customer *customer2);
+
+bool matchName(Customer *customer, char *stringRegex);
+
+bool matchSurname(Customer *customer, char *regex);
+
+bool matchCity(Customer *customer, char *stringRegex);
+
+bool matchPostalCode(Customer *customer, char *stringRegex);
+
+bool matchPhone(Customer *customer, char *stringRegex);
+
+bool matchEmail(Customer *customer, char *stringRegex);
+
+bool matchJob(Customer *customer, char *stringRegex);
 
 bool hasMissingData(const Customer *current);
 

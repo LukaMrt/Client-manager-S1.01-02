@@ -77,18 +77,18 @@ void sort(Customer *customer, Command command) {
 
     if (customer != head) {
         temp->next = (Customer *) malloc(sizeof(Customer));
-        Customer newCustomer = createCustomer();
+        createCustomer(temp->next);
+        temp = temp->next;
 
-        copyString(newCustomer.name, customer->name, NAME_SIZE);
-        copyString(newCustomer.surname, customer->surname, SURNAME_SIZE);
-        copyString(newCustomer.city, customer->city, CITY_SIZE);
-        newCustomer.postalCode = customer->postalCode;
-        copyString(newCustomer.phone, customer->phone, PHONE_SIZE);
-        copyString(newCustomer.email, customer->email, EMAIL_SIZE);
-        copyString(newCustomer.job, customer->job, JOB_SIZE);
-        newCustomer.next = customer->next;
+        copyString(temp->name, customer->name, NAME_SIZE);
+        copyString(temp->surname, customer->surname, SURNAME_SIZE);
+        copyString(temp->city, customer->city, CITY_SIZE);
+        temp->postalCode = customer->postalCode;
+        copyString(temp->phone, customer->phone, PHONE_SIZE);
+        copyString(temp->email, customer->email, EMAIL_SIZE);
+        copyString(temp->job, customer->job, JOB_SIZE);
+        temp->next = customer->next;
 
-        *(temp->next) = newCustomer;
         *customer = *head;
     }
 
