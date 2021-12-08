@@ -4,6 +4,7 @@
 #include "../../data.h"
 #include "../commands.h"
 #include "../../utils/utils.h"
+#include "../../utils/customersUtils.h"
 
 void edit(Customer *customer, Command command) {
 
@@ -18,10 +19,10 @@ void edit(Customer *customer, Command command) {
     char searchName[NAME_SIZE];
     char searchSurname[SURNAME_SIZE];
     char searchCity[CITY_SIZE];
+    char searchPostalCode[6];
     char searchPhone[PHONE_SIZE];
     char searchEmail[EMAIL_SIZE];
     char searchJob[JOB_SIZE];
-    int searchPostalCode = 0;
 
     createEmptyString(name, NAME_SIZE);
     createEmptyString(surname, SURNAME_SIZE);
@@ -33,6 +34,7 @@ void edit(Customer *customer, Command command) {
     createEmptyString(searchName, NAME_SIZE);
     createEmptyString(searchSurname, SURNAME_SIZE);
     createEmptyString(searchCity, CITY_SIZE);
+    createEmptyString(searchPostalCode, 6);
     createEmptyString(searchPhone, PHONE_SIZE);
     createEmptyString(searchEmail, EMAIL_SIZE);
     createEmptyString(searchJob, JOB_SIZE);
@@ -94,7 +96,7 @@ void edit(Customer *customer, Command command) {
         if (compareStrings(removeNullCharacters(option.name), "-spostal")
             || compareStrings(removeNullCharacters(option.name), "-spostalCode")
             || compareStrings(removeNullCharacters(option.name), "-spo")) {
-            searchPostalCode = atoi(option.value);
+            copyString(searchJob, option.value, 6);
         }
 
         if (compareStrings(removeNullCharacters(option.name), "-sphone")
@@ -114,106 +116,156 @@ void edit(Customer *customer, Command command) {
 
     }
 
-    Customer *current = customer;
-
-    while (current != NULL
-           && current->postalCode != -1
-           && (strlen(searchName) != 0 && !compareStrings(current->name, searchName)
-               || strlen(searchSurname) != 0 && !compareStrings(current->surname, searchSurname)
-               || strlen(searchCity) != 0 && !compareStrings(current->city, searchCity)
-               || strlen(searchPhone) != 0 && !compareStrings(current->phone, searchPhone)
-               || strlen(searchEmail) != 0 && !compareStrings(current->email, searchEmail)
-               || strlen(searchJob) != 0 && !compareStrings(current->job, searchJob)
-               || searchPostalCode != 0 && current->postalCode != postalCode)) {
-        current = current->next;
-    }
-
-    if (current == NULL || current->postalCode == -1) {
-        printf("Customer not found.\n");
-        return;
-    }
-
     if (strlen(name) == 0) {
-        printf("Enter the name of the new customer to add (enter to keep current value) : ");
+        printf("Enter the new name of the customer (enter to keep current value) : ");
         fgets(name, NAME_SIZE, stdin);
         fseek(stdin, 0, SEEK_END);
         if (compareStrings(name, "\n")) {
-            copyString(name, current->name, NAME_SIZE);
+            name[0] = '\0';
         }
     }
 
     if (strlen(surname) == 0) {
-        printf("Enter the surname of the new customer (enter to keep current value) : ");
+        printf("Enter the new surname of the customer (enter to keep current value) : ");
         fgets(surname, SURNAME_SIZE, stdin);
         fseek(stdin, 0, SEEK_END);
         if (compareStrings(surname, "\n")) {
-            copyString(surname, current->surname, SURNAME_SIZE);
+            surname[0] = '\0';
         }
     }
 
     if (strlen(city) == 0) {
-        printf("Enter the city of the new customer (enter to keep current value) : ");
+        printf("Enter the new city of the customer (enter to keep current value) : ");
         fgets(city, CITY_SIZE, stdin);
         fseek(stdin, 0, SEEK_END);
         if (compareStrings(city, "\n")) {
-            copyString(city, current->city, CITY_SIZE);
+            city[0] = '\0';
         }
     }
 
     while (postalCode < 10000 || 99999 < postalCode) {
-        printf("Enter the postal code of the new customer (enter to keep current value) : ");
+        printf("Enter the new postal code of the customer (enter to keep current value) : ");
         char tmp[10];
         createEmptyString(tmp, 10);
         fgets(tmp, 10, stdin);
         fseek(stdin, 0, SEEK_END);
         if (compareStrings(tmp, "\n")) {
-            postalCode = current->postalCode;
+            postalCode = -1;
             break;
         }
         postalCode = atoi(tmp); // TODO : check if postalCode is a number
     }
 
     while (strlen(phone) == 0 || !validPhoneNumber(phone)) {
-        printf("Enter the phone number of the new customer (enter to keep current value) : ");
+        printf("Enter the new phone number of the customer (enter to keep current value) : ");
         fgets(phone, PHONE_SIZE, stdin);
         fseek(stdin, 0, SEEK_END);
         if (compareStrings(phone, "\n")) {
-            copyString(phone, current->phone, PHONE_SIZE);
+            phone[0] = '\0';
+            break;
         }
     }
 
     if (strlen(email) == 0) {
-        printf("Enter the email of the new customer (enter to keep current value) : ");
+        printf("Enter the new email of the customer (enter to keep current value) : ");
         fgets(email, EMAIL_SIZE, stdin);
         fseek(stdin, 0, SEEK_END);
         if (compareStrings(email, "\n")) {
-            copyString(email, current->email, EMAIL_SIZE);
+            email[0] = '\0';
         }
     }
 
     if (strlen(job) == 0) {
-        printf("Enter the job of the new customer (enter to keep current value) : ");
+        printf("Enter the new job of the customer (enter to keep current value) : ");
         fgets(job, JOB_SIZE, stdin);
         fseek(stdin, 0, SEEK_END);
         if (compareStrings(job, "\n")) {
-            copyString(job, current->job, JOB_SIZE);
+            job[0] = '\0';
         }
     }
 
-    toUpperCase(city);
-    removeNewLineCharacters(name);
-    removeNewLineCharacters(surname);
-    removeNewLineCharacters(city);
-    removeNewLineCharacters(phone);
-    removeNewLineCharacters(email);
-    removeNewLineCharacters(job);
+    char newName[NAME_SIZE];
+    char newSurname[SURNAME_SIZE];
+    char newCity[CITY_SIZE];
+    char newPhone[PHONE_SIZE];
+    char newEmail[EMAIL_SIZE];
+    char newJob[JOB_SIZE];
+    int newPostalCode = 0;
 
-    copyString(current->name, name, NAME_SIZE);
-    copyString(current->surname, surname, SURNAME_SIZE);
-    copyString(current->city, city, CITY_SIZE);
-    current->postalCode = postalCode;
-    copyString(current->phone, phone, PHONE_SIZE);
-    copyString(current->email, email, EMAIL_SIZE);
-    copyString(current->job, job, JOB_SIZE);
-    printf("Customer edited successfully.\n");
+    copyString(newName, name, NAME_SIZE);
+    copyString(newSurname, surname, SURNAME_SIZE);
+    copyString(newCity, city, CITY_SIZE);
+    copyString(newPhone, phone, PHONE_SIZE);
+    copyString(newEmail, email, EMAIL_SIZE);
+    copyString(newJob, job, JOB_SIZE);
+
+    Customer *current = customer;
+    int i = 0;
+
+    while (current != NULL && current->postalCode != -1) {
+
+        if ((strlen(searchName) == 0 || matchName(current, searchName))
+             && (strlen(searchSurname) == 0 || matchSurname(current, searchSurname))
+             && (strlen(searchCity) == 0 || matchCity(current, searchCity))
+             && (strlen(searchPhone) == 0 || matchPhone(current, searchPhone))
+             && (strlen(searchEmail) == 0 || matchEmail(current, searchEmail))
+             && (strlen(searchJob) == 0 || matchJob(current, searchJob))
+             && (strlen(searchPostalCode) == 0 || matchPostalCode(current, searchPostalCode))) {
+
+            i++;
+
+            if (strlen(name) == 0) {
+                copyString(newName, current->name, NAME_SIZE);
+            }
+
+            if (strlen(surname) == 0) {
+                copyString(newSurname, current->surname, SURNAME_SIZE);
+            }
+
+            if (strlen(city) == 0) {
+                copyString(newCity, current->city, CITY_SIZE);
+            }
+
+            if (strlen(phone) == 0) {
+                copyString(newPhone, current->phone, PHONE_SIZE);
+            }
+
+            if (strlen(email) == 0) {
+                copyString(newEmail, current->email, EMAIL_SIZE);
+            }
+
+            if (strlen(job) == 0) {
+                copyString(newJob, current->job, JOB_SIZE);
+            }
+
+            if (postalCode == -1) {
+                newPostalCode = current->postalCode;
+            }
+
+            toUpperCase(newCity);
+            removeNewLineCharacters(newName);
+            removeNewLineCharacters(newSurname);
+            removeNewLineCharacters(newCity);
+            removeNewLineCharacters(newPhone);
+            removeNewLineCharacters(newEmail);
+            removeNewLineCharacters(newJob);
+
+            copyString(current->name, newName, NAME_SIZE);
+            copyString(current->surname, newSurname, SURNAME_SIZE);
+            copyString(current->city, newCity, CITY_SIZE);
+            current->postalCode = newPostalCode;
+            copyString(current->phone, newPhone, PHONE_SIZE);
+            copyString(current->email, newEmail, EMAIL_SIZE);
+            copyString(current->job, newJob, JOB_SIZE);
+        }
+
+        current = current->next;
+    }
+
+    if (i == 0) {
+        printf("No customer found.\n");
+        return;
+    }
+
+    printf("%d customers edited successfully.\n", i);
 }
