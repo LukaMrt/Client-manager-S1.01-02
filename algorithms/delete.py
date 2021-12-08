@@ -1,5 +1,4 @@
 from typing import Optional
-import re
 
 
 class Node:
@@ -8,17 +7,17 @@ class Node:
         self.next = None
 
 
-def filter(list: Node, regex: str) -> Optional[Node]:
+def delete(list: Node, data: int) -> Optional[Node]:
     """
-    pre-cond : regex is not None
-    post-cond : return a list with Nodes matching with given value or None otherwise
+    pre-cond : date is not None
+    post-cond : return a list with values different from given data
     """
     new_head = None
     current = None
 
     while list is not None:
 
-        if re.match(regex, str(list.data)):
+        if data != list.data:
 
             if new_head is None:
                 new_head = Node()
@@ -53,8 +52,8 @@ if __name__ == '__main__':
     node5.next = node4
     node4.next = None
 
-    found = filter(node2, '[0-2]')
+    list = delete(node2, 4)
 
-    while found is not None:
-        print(found.data)
-        found = found.next
+    while list is not None:
+        print(list.data)
+        list = list.next

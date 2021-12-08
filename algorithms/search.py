@@ -7,7 +7,11 @@ class Node:
         self.next = None
 
 
-def search(data: int, list: Node) -> Optional[Node]:
+def search(list: Node, data: int) -> Optional[Node]:
+    """
+    pre-cond : data is not None
+    post-cond : return the first Node with given value or None otherwise
+    """
     while list is not None:
         if list.data == data:
             return list
@@ -36,7 +40,7 @@ if __name__ == '__main__':
     node5.next = node4
     node4.next = None
 
-    found = search(3, node2)
+    found = search(node2, 3)
 
     if found is not None:
         print(found.data)
