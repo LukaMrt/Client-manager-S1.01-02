@@ -16,6 +16,7 @@ void delete(Customer *customer, Command command) {
     char name[20];
     printf("Enter the name of the customer to delete : ");
     fgets(name, 20, stdin);
+    removeNewLineCharacters(name);
 
     Customer *current = customer;
     Customer *before = customer;
@@ -37,7 +38,6 @@ void delete(Customer *customer, Command command) {
 
     after = current->next;
     before->next = after;
-
 
     if (after == NULL) {
         createCustomer(after);
