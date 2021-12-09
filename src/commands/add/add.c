@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <ctype.h>
 #include "../../data.h"
 #include "../commands.h"
 #include "add.h"
@@ -71,21 +70,24 @@ void add(Customer *customer, Command command) {
 
     }
 
-    if (strlen(name) == 0) {
+    while (strlen(name) == 0) {
         printf("Enter the name of the new customer to add : ");
         fgets(name, NAME_SIZE, stdin);
+        removeNewLineCharacters(name);
         fseek(stdin, 0, SEEK_END);
     }
 
-    if (strlen(surname) == 0) {
+    while (strlen(surname) == 0) {
         printf("Enter the surname of the new customer : ");
         fgets(surname, SURNAME_SIZE, stdin);
+        removeNewLineCharacters(surname);
         fseek(stdin, 0, SEEK_END);
     }
 
-    if (strlen(city) == 0) {
+    while (strlen(city) == 0) {
         printf("Enter the city of the new customer : ");
         fgets(city, CITY_SIZE, stdin);
+        removeNewLineCharacters(city);
         fseek(stdin, 0, SEEK_END);
     }
 
@@ -102,15 +104,17 @@ void add(Customer *customer, Command command) {
         fseek(stdin, 0, SEEK_END);
     }
 
-    if (strlen(email) == 0) {
+    while (strlen(email) == 0) {
         printf("Enter the email of the new customer : ");
         fgets(email, EMAIL_SIZE, stdin);
+        removeNewLineCharacters(email);
         fseek(stdin, 0, SEEK_END);
     }
 
-    if (strlen(job) == 0) {
+    while (strlen(job) == 0) {
         printf("Enter the job of the new customer : ");
         fgets(job, JOB_SIZE, stdin);
+        removeNewLineCharacters(job);
         fseek(stdin, 0, SEEK_END);
     }
 
@@ -122,24 +126,24 @@ void add(Customer *customer, Command command) {
     removeNewLineCharacters(email);
     removeNewLineCharacters(job);
 
-    Customer *current = customer;
+    Customer *newCustomer = (Customer *) malloc(sizeof(Customer));
+    createCustomer(newCustomer);
 
-    while (current->postalCode != -1 && current->next != NULL) {
-        current = current->next;
-    }
+    strcpy(newCustomer->name, name);
+    strcpy(newCustomer->surname, surname);
+    strcpy(newCustomer->city, city);
+    newCustomer->postalCode = postalCode;
+    strcpy(newCustomer->phone, phone);
+    strcpy(newCustomer->email, email);
+    strcpy(newCustomer->job, job);
+    newCustomer->next = NULL;
 
     if (customer->postalCode != -1) {
-        current->next = (Customer *) malloc(sizeof(Customer));
-        createCustomer(current->next);
-        current = current->next;
+        newCustomer->next = (Customer *) malloc(sizeof(Customer));
+        *newCustomer->next = *customer;
     }
 
-    strcpy(current->name, name);
-    strcpy(current->surname, surname);
-    strcpy(current->city, city);
-    current->postalCode = postalCode;
-    strcpy(current->phone, phone);
-    strcpy(current->email, email);
-    strcpy(current->job, job);
+    *customer = *newCustomer;
+
     printf("Customer has been added successfully\n");
 }

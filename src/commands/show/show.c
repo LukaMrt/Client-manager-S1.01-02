@@ -302,7 +302,7 @@ void showSort(Customer *customer, int (*fieldComparator)(Customer *, Customer *)
 
     mergeSort(&copy, fieldComparator, revert);
 
-    showList(copy, "Here is the filtered customers list :\n\n");
+    showList(copy, "Here is the sorted customers list :\n\n");
 }
 
 /**
