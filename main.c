@@ -31,7 +31,7 @@ int main() {
              && !compareStrings(entry, "end")
              && !compareStrings(entry, "q"));
 
-    printf("  ~~~ Customers manager ~~~ \n");
+    printf("\n  ~~~ Customers manager ~~~ \n");
 
     return 0;
 }
