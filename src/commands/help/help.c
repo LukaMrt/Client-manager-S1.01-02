@@ -19,8 +19,13 @@ void help() {
     printf("\t-job, -j : specify the job of the customer to add.\n");
 
     printf("\nCommand delete : remove a user from the customers list (if you don't give any option, it will delete all customers).\n");
-    printf("\t-field, -f : specify the field which will be used for the deletion.\n");
-    printf("\t-value, -v : specify the value of the field used for the deletion.\n");
+    printf("\t-name, -n : specify the name of the customer to delete (regex).\n");
+    printf("\t-surname, -s : specify the surname of the customer to delete (regex).\n");
+    printf("\t-city, -c : specify the city of the customer to delete (regex).\n");
+    printf("\t-postal, -postalCode, -po : specify the postal code of the customer to delete (regex).\n");
+    printf("\t-phone, -ph : specify the phone of the customer to delete (regex).\n");
+    printf("\t-email, -e : specify the email of the customer to delete (regex).\n");
+    printf("\t-job, -j : specify the job of the customer to delete (regex).\n");
 
     printf("\nCommand edit : edit all user matching with given regex in the customers list.\n");
     printf("\t-name, -n : specify the new name of the customer.\n");
