@@ -11,6 +11,25 @@ Use git clone to clone and use the project :
 git clone https://github.com/LukaMrt/Client-manager-S1.01-02.git
 ```
 
+To compile it, you need to have cmake installed. Then juste run the following commands :
+
+```
+cmake .
+cmake --build .
+```
+
+Then, according to your operating system, you can run the executable with the following commands :
+
+Windows :
+````
+.\Customer_Manager
+````
+
+UNIX based OS :
+````
+./Customer_Manager
+````
+
 ## Usage
 
 To run the project, you need to compile it or run it into an IDE. You can run it with Clion or Visual Studio Code. The
