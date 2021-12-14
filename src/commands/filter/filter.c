@@ -1,3 +1,5 @@
+/* In charge : NAUDTS Angelo */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -90,13 +92,13 @@ void filter(Customer *customer, Command command) {
             continue;
         }
 
-        copyString(copyCurrent->name, current->name, NAME_SIZE);
-        copyString(copyCurrent->surname, current->surname, SURNAME_SIZE);
-        copyString(copyCurrent->city, current->city, CITY_SIZE);
+        strcpy(copyCurrent->name, current->name);
+        strcpy(copyCurrent->surname, current->surname);
+        strcpy(copyCurrent->city, current->city);
         copyCurrent->postalCode = current->postalCode;
-        copyString(copyCurrent->phone, current->phone, PHONE_SIZE);
-        copyString(copyCurrent->email, current->email, EMAIL_SIZE);
-        copyString(copyCurrent->job, current->job, JOB_SIZE);
+        strcpy(copyCurrent->phone, current->phone);
+        strcpy(copyCurrent->email, current->email);
+        strcpy(copyCurrent->job, current->job);
         copyCurrent->next = (Customer *) malloc(sizeof(Customer));
         copyCurrent = copyCurrent->next;
         createCustomer(copyCurrent);

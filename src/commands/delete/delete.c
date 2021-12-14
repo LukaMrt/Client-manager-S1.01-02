@@ -1,3 +1,5 @@
+/* In charge : NAUDTS Angelo */
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -68,7 +70,6 @@ void delete(Customer *customer, Command command) {
             copyString(job, option.value, JOB_SIZE);
         }
     }
-
 
     Customer *current = customer;
     Customer *before = customer;

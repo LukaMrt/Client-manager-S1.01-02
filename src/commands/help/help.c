@@ -1,3 +1,5 @@
+/* In charge : NAUDTS Angelo */
+
 #include <stdio.h>
 
 /**
@@ -16,7 +18,7 @@ void help() {
     printf("\t-email, -e : specify the email of the customer to add.\n");
     printf("\t-job, -j : specify the job of the customer to add.\n");
 
-    printf("\nCommand delete : remove a user from the customers list (if you don't give any option, remove will be done with name field).\n");
+    printf("\nCommand delete : remove a user from the customers list (if you don't give any option, it will delete all customers).\n");
     printf("\t-field, -f : specify the field which will be used for the deletion.\n");
     printf("\t-value, -v : specify the value of the field used for the deletion.\n");
 

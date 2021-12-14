@@ -1,3 +1,5 @@
+/* In charge : MARET Luka */
+
 #include <stdio.h>
 #include <stdbool.h>
 #include "commands.h"
