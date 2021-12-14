@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "commands/commands.h"
-#include "utils/utils.h"
-#include "utils/customersUtils.h"
+#include "src/commands/commands.h"
+#include "src/utils/utils.h"
+#include "src/utils/customersUtils.h"
 
 /**
  * Entry point of application
