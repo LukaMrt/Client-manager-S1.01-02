@@ -54,6 +54,12 @@ To exit the program you can enter the command `exit`, `quit`, `stop`, `end` or `
   ~~~ Customers manager ~~~ 
 ```
 
+:warning: **Warning** : Please notice that there isn't any search command. We have chosen that because we are conviced 
+that the search is a particular case of filter. As you will see in the dedicated section below, the filter command 
+works with regex and the search is nothing else rather than a regex with the full specific searched field. For example 
+if we are looking for the Customer with the name `Alex` and living in the city `LONDON`, we just have to provide the 
+regex `Alex` for the name and `LONDON` for the city.
+
 Here is the list of the available commands :
 
 ### Help command
