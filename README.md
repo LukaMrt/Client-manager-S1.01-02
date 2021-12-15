@@ -96,7 +96,7 @@ You can also provide the customer's information using the parameters :
 After a parameter, you need to enter the value of the parameter. Here is an example :
 
 ```
- => Enter a command : add -name "John" -surname "Doe" -city "NEW YORK" -postal "11111" -phone "11.11.11.11.11" -email john.doe@gmail.com -job student
+ => Enter a command : add -name John -surname Doe -city NEW YORK -postal 11111 -phone 11.11.11.11.11 -email john.doe@gmail.com -job student
  Customer has been added successfully
 ```
 
