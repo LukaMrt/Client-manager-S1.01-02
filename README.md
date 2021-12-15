@@ -102,9 +102,8 @@ After a parameter, you need to enter the value of the parameter. Here is an exam
 
 :warning: **Warning** :
 The postal code and phone number must match a specific pattern. If you don't provide the correct pattern, the program
-will ask you to enter the correct pattern again. The postalcode must be an integer between 0 and 99999. The phone number
-must be an integer between 11111 and 99999 (includes). The phone number must follow the pattern : XX.XX.XX.XX.XX where X
-is an integer between 0 and 9 (includes).
+will ask you to enter the correct pattern again. The postal code must be an integer between 11111 and 99999 (includes).
+The phone number must follow the pattern : XX.XX.XX.XX.XX where X is an integer between 0 and 9 (includes).
 
 ### Delete command
 
