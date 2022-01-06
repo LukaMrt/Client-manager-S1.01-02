@@ -76,6 +76,15 @@ void delete(Customer *customer, Command command) {
     Customer *after;
     int i = 0;
 
+    if (strlen(name) == 0 && strlen(surname) == 0 && strlen(city) == 0 && strlen(phone) == 0 && strlen(email) == 0 &&
+        strlen(job) == 0 && strlen(postalCode) == 0) {
+        after = (Customer *) malloc(sizeof(Customer));
+        createCustomer(after);
+        *customer = *after;
+        printf("Customers list cleared successfully.\n");
+        return;
+    }
+
     while (current != NULL && current->postalCode != -1) {
 
         if ((strlen(name) == 0 || matchName(current, name))

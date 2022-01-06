@@ -26,7 +26,7 @@ int main() {
 
     do {
 
-        printf("\n => Enter a command : ");
+        printf("\n => Enter a command (help for help) : ");
         entry = scanString();
 
         clock_gettime(CLOCK_REALTIME, &startTime);
