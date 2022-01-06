@@ -21,14 +21,22 @@ cmake --build .
 Then, according to your operating system, you can run the executable with the following commands :
 
 Windows :
+
 ````
 .\Customer_Manager
 ````
 
 UNIX based OS :
+
 ````
 ./Customer_Manager
 ````
+
+## Note to colleagues
+
+If you are the duo which is evaluating this project, please notice that to see the execution time of each operation you
+need to provide options to the commands. If you don't, the execution time will include the time when the program is
+asking you for the options. Follow the instructions below or the help command to see the options.
 
 ## Usage
 
@@ -54,10 +62,10 @@ To exit the program you can enter the command `exit`, `quit`, `stop`, `end` or `
   ~~~ Customers manager ~~~ 
 ```
 
-:warning: **Warning** : Please notice that there isn't any search command. We have chosen that because we are conviced 
-that the search is a particular case of filter. As you will see in the dedicated section below, the filter command 
-works with regex and the search is nothing else rather than a regex with the full specific searched field. For example 
-if we are looking for the Customer with the name `Alex` and living in the city `LONDON`, we just have to provide the 
+:warning: **Warning** : Please notice that there isn't any search command. We have chosen that because we are conviced
+that the search is a particular case of filter. As you will see in the dedicated section below, the filter command works
+with regex and the search is nothing else rather than a regex with the full specific searched field. For example if we
+are looking for the Customer with the name `Alex` and living in the city `LONDON`, we just have to provide the
 regex `Alex` for the name and `LONDON` for the city.
 
 Here is the list of the available commands :
