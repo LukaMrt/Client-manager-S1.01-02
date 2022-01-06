@@ -1,8 +1,5 @@
 # IUT Lyon 1, SAE C/algo
 
-This project is a school project for the first semester of University Bachelor of Technology. It is a customer
-management system with which you can perform many actions.
-
 ## Note to colleagues
 
 If you are the duo which is evaluating this project, please notice that to see the execution time of each operation you

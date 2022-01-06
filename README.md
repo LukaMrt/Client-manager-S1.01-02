@@ -32,12 +32,6 @@ UNIX based OS :
 ./Customer_Manager
 ````
 
-## Note to colleagues
-
-If you are the duo which is evaluating this project, please notice that to see the execution time of each operation you
-need to provide options to the commands. If you don't, the execution time will include the time when the program is
-asking you for the options. Follow the instructions below or the help command to see the options.
-
 ## Usage
 
 To run the project, you need to compile it or run it into an IDE. You can run it with Clion or Visual Studio Code. The
