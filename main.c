@@ -24,6 +24,8 @@ int main() {
     struct timespec startTime;
     struct timespec endTime;
 
+    printf("If you are students who have to evaluate the performance of the program, please read the INSTRUCTIONS.pdf file\n");
+
     do {
 
         printf("\n => Enter a command (help for help) : ");
