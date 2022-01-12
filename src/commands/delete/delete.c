@@ -78,6 +78,13 @@ void delete(Customer *customer, Command command) {
 
     if (strlen(name) == 0 && strlen(surname) == 0 && strlen(city) == 0 && strlen(phone) == 0 && strlen(email) == 0 &&
         strlen(job) == 0 && strlen(postalCode) == 0) {
+        printf("Are you sure to delete all of the customers? (y/n) \n");
+        char validation;
+        scanf("%c",&validation);
+        fseek(stdin, 0, SEEK_END);
+        if (validation=='n'){
+            return;
+        }
         after = (Customer *) malloc(sizeof(Customer));
         createCustomer(after);
         *customer = *after;

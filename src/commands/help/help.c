@@ -73,4 +73,15 @@ void help() {
     printf("\t-revert, -r : sort in the descending order.\n");
 
     printf("\nCommands exit, quit, stop, end, q : exit the program.\n");
+
+    printf("\nExamples:\n");
+    printf("\tadd -n bob -s lul -c bobcity\n");
+    printf("\tdelete -n bob\n");
+    printf("\tedit -ssurname ^Bob$\n");
+    printf("\tfilter -n ad\n");
+    printf("\tload -f documents/test.csv\n");
+    printf("\tsave -f doc/test.csv\n");
+    printf("\tshow -s name\n");
+    printf("\tsort -r surname\n");
+    printf("\tq\n");
 }

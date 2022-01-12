@@ -75,6 +75,13 @@ void filter(Customer *customer, Command command) {
     createCustomer(copyCurrent);
     Customer *copy = copyCurrent;
 
+    printf("The filter will definitely remove some customers, are you sure ? (y/n) \n");
+    char validation;
+    scanf("%c",&validation);
+    fseek(stdin, 0, SEEK_END);
+    if (validation=='n'){
+        return;
+    }
     while (current != NULL) {
 
         char stringPostalCode[6];
